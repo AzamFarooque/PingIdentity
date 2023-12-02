@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Please Enter Text" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1ZA-K9-9fd">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Please Enter Text" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1ZA-K9-9fd">
                                 <rect key="frame" x="16" y="215" width="361" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="ddK-32-Fgs"/>
@@ -78,7 +78,9 @@
                     <navigationItem key="navigationItem" title="Home" id="NxB-ML-pyl"/>
                     <connections>
                         <outlet property="biometricEnableAndDisableSwitch" destination="EWs-jE-421" id="7zq-13-FXf"/>
+                        <outlet property="biometricEnableAndDisabledLbl" destination="WL4-2C-ohs" id="RnR-KM-xFq"/>
                         <outlet property="inputTextField" destination="1ZA-K9-9fd" id="r6x-a7-Qp9"/>
+                        <outlet property="sendButton" destination="NBy-5E-plt" id="5AB-eB-qE9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

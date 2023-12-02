@@ -34,7 +34,7 @@ class PingIdentityDecryptMessageVC: UIViewController {
     // MARK: - Deinit
     
     deinit {
-        NotificationCenter.default.removeObserver(self)
+        clearObserver()
     }
     
     // MARK: - viewDidLoad Method
@@ -51,6 +51,12 @@ class PingIdentityDecryptMessageVC: UIViewController {
         setUpDecryptMessageLabel()
         addConstraintsForDecryptLabel()
     }
+    
+    // MARK: - Remove observers to avoid memory leaks
+    
+    func clearObserver(){
+        NotificationCenter.default.removeObserver(self)
+    }
 }
 
 // Setting label
@@ -60,6 +66,7 @@ extension PingIdentityDecryptMessageVC {
     
     func setUpDecryptMessageLabel(){
         decryptMessageLbl.textAlignment = .center
+        decryptMessageLbl.numberOfLines = 0
         decryptMessageLbl.font = .boldSystemFont(ofSize: 15)
         decryptMessageLbl.textColor = .black
         view.addSubview(decryptMessageLbl)

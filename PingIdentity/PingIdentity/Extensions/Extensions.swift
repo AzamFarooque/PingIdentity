@@ -41,3 +41,11 @@ func showToast(message : String, font: UIFont) {
         toastLabel.removeFromSuperview()
     })
 } }
+
+
+public class HapticTouch{
+    static func addHapticTouch(style: UIImpactFeedbackGenerator.FeedbackStyle){
+        let generator = UIImpactFeedbackGenerator(style: style)
+        generator.impactOccurred()
+    }
+}

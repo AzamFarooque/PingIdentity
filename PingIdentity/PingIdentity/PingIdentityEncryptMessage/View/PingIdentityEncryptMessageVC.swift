@@ -10,6 +10,8 @@ import UIKit
 
 class PingIdentityEncryptMessageVC: UIViewController {
     
+    @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var biometricEnableAndDisabledLbl: UILabel!
     let viewModel = PingIdentityEncryptMessageViewModel()
     // InputTextField IBOutlet
     @IBOutlet weak var inputTextField: UITextField!
@@ -29,11 +31,14 @@ class PingIdentityEncryptMessageVC: UIViewController {
         navigationController?.navigationBar.isTranslucent = true
         isBiometricRequired = UserDefaults.standard.bool(forKey: StringConstants.UserDefaultKey.SwitchEnableAndDisable)
         isBiometricRequired ?  biometricEnableAndDisableSwitch.setOn(true, animated: false) : biometricEnableAndDisableSwitch.setOn(false, animated: false)
+        biometricEnableAndDisabledLbl.text = isBiometricRequired ? StringConstants.GenericStrings.BiometricEnabledText : StringConstants.GenericStrings.BiometricDisableText
+        
+        sendButton.layer.cornerRadius = 8
         
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self)
+        clearObserver()
     }
     
     // MARK: - Button touch action
@@ -41,9 +46,11 @@ class PingIdentityEncryptMessageVC: UIViewController {
     @IBAction func didTapToEnableAndDisableFaceId(_ sender: UISwitch) {
         sender.isOn ? UserDefaults.standard.set(true , forKey: StringConstants.UserDefaultKey.SwitchEnableAndDisable) : UserDefaults.standard.set(false , forKey: StringConstants.UserDefaultKey.SwitchEnableAndDisable)
         isBiometricRequired = UserDefaults.standard.bool(forKey: StringConstants.UserDefaultKey.SwitchEnableAndDisable)
+        biometricEnableAndDisabledLbl.text = isBiometricRequired ? StringConstants.GenericStrings.BiometricEnabledText : StringConstants.GenericStrings.BiometricDisableText
     }
     
     @IBAction func didTapToSend(_ sender: Any) {
+        HapticTouch.addHapticTouch(style: .light)
         PingIdentityKeyChainHandler.shared.removeAllKey()
         if self.inputTextField.text?.isEmpty ?? false{
             self.showToast(message: StringConstants.GenericStrings.PleaseEnterText, font: .systemFont(ofSize: 12.0))
@@ -51,6 +58,12 @@ class PingIdentityEncryptMessageVC: UIViewController {
         }
         self.inputTextField.resignFirstResponder()
         self.generateRSAKeyPair()
+    }
+    
+    // MARK: - Remove observers to avoid memory leaks
+    
+    func clearObserver(){
+        NotificationCenter.default.removeObserver(self)
     }
 }
 

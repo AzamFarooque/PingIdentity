@@ -21,6 +21,8 @@ struct StringConstants {
         static let TextDecrypted =  "Text Decrypted"
         static let TimeerCreatedForFifteenSec = "Timer Created for 15 sec"
         static let FaceIdAuthoriseText = "Please authorise with touch id"
+        static let BiometricEnabledText = "Biometric Enabled"
+        static let BiometricDisableText = "Biometric Disable"
         
     }
     
