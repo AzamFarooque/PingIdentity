@@ -11,7 +11,7 @@ import LocalAuthentication
 class PingIdentityDecryptMessageVC: UIViewController {
     let decryptMessageLbl = UILabel()
     var userInfo : [String : Any]?
-    
+    let viewModel = PingIdentityDecryptMessageViewModel()
     
     // MARK: - init
     
@@ -110,47 +110,30 @@ extension PingIdentityDecryptMessageVC {
 // Verify signature and decrypt message using RSA
 extension PingIdentityDecryptMessageVC{
     
-    // MARK: - Verifying Signature
-    
     func verifySignature(){
-        let payload = userInfo?[StringConstants.JSONKey.Payload] as? [String : Any]
-        let encryptedString = payload?[StringConstants.JSONKey.EncryptedString]
-        let signature = payload?[StringConstants.JSONKey.Signature]
-        if let encrpt = encryptedString , let sig = signature {
-            do{
-                // Verify the signature using the public key
-                let secondPublicKey = try PingIdentityKeyChainHandler.shared.getKeyFromKeychain(identifier: StringConstants.KeyChainKey.secondPublicKey)
-                let isSignatureValid = RSAHandler.shared.verifySignature(encrpt as! Data, signature: sig as! Data, publicKey: secondPublicKey)
-                if isSignatureValid{
-                    self.showToast(message: StringConstants.GenericStrings.SignatureVerified, font: .systemFont(ofSize: 12.0))
-                    decryptMessage(encrpt: encrpt as! Data)
-                }else{
-                    self.showToast(message: StringConstants.GenericStrings.SignatureNotVerified, font: .systemFont(ofSize: 12.0))
-                }
-                
-            }catch let error {
-                print(error.localizedDescription)
+        guard let payload = userInfo?[StringConstants.JSONKey.Payload] as? [String : Any] else {return}
+        viewModel.verifySignature(payload: payload){ [weak self] (success , error) in
+            if success{
+                self?.showToast(message: StringConstants.GenericStrings.SignatureVerified, font: .systemFont(ofSize: 12.0))
+                self?.decryptMessage()
+            }else{
+                self?.showToast(message: StringConstants.GenericStrings.SignatureNotVerified, font: .systemFont(ofSize: 12.0))
             }
         }
     }
     
-    // MARK: - Decrypting Message
-    
-    func decryptMessage(encrpt : Data){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
-            do {
-                // Decrypt the encrypted data using the private key
-                let privateKey = try PingIdentityKeyChainHandler.shared.getKeyFromKeychain(identifier: StringConstants.KeyChainKey.Privatekey)
-                let decryptedData = try RSAHandler.shared.decryptRSA(encrpt , privateKey: privateKey)
-                let decryptedText = String(data: decryptedData, encoding: .utf8) ?? "Decryption failed"
-                self.showToast(message: StringConstants.GenericStrings.TextDecrypted, font: .systemFont(ofSize: 12.0))
-                
-                self.decryptMessageLbl.text = decryptedText
-                
-            }catch let error {
-                print(error.localizedDescription)
+    func decryptMessage(){
+        if let payload = userInfo?[StringConstants.JSONKey.Payload] as? [String : Any] , let encrpt = payload[StringConstants.JSONKey.EncryptedString] as? Data {
+            viewModel.decryptMessage(encrpt: encrpt) { [weak self] (success , error) in
+                if success{
+                    self?.showToast(message: StringConstants.GenericStrings.TextDecrypted, font: .systemFont(ofSize: 12.0))
+                    self?.decryptMessageLbl.text = self?.viewModel.decryptMessageDataSource?.decryptMessage
+                }else{
+                    
+                }
             }
         }
     }
 }
+
 
