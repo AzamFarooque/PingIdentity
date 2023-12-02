@@ -101,6 +101,7 @@
 		8671C79B2B1AF3C6004A3FA9 /* PingIdentityEncryptMessage */ = {
 			isa = PBXGroup;
 			children = (
+				86EF6AD42B1BA43C00826C6A /* StoryBoard */,
 				86EF6AC82B1B73DE00826C6A /* Model */,
 				86EF6AC62B1B73BE00826C6A /* View */,
 				86EF6AC72B1B73CB00826C6A /* ViewModel */,
@@ -190,7 +191,6 @@
 				8671C7A12B1AFEA3004A3FA9 /* RSAHandler */,
 				8671C79B2B1AF3C6004A3FA9 /* PingIdentityEncryptMessage */,
 				8671C79C2B1AF3E9004A3FA9 /* PingIdentityDecryptMessage */,
-				86D902952B183CB900D3C793 /* Main.storyboard */,
 				86D902982B183CBA00D3C793 /* Assets.xcassets */,
 				86D9029A2B183CBA00D3C793 /* LaunchScreen.storyboard */,
 				86D9029D2B183CBA00D3C793 /* Info.plist */,
@@ -270,6 +270,14 @@
 				86EF6AD02B1B908700826C6A /* PingIdentityDecryptMessageViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		86EF6AD42B1BA43C00826C6A /* StoryBoard */ = {
+			isa = PBXGroup;
+			children = (
+				86D902952B183CB900D3C793 /* Main.storyboard */,
+			);
+			path = StoryBoard;
 			sourceTree = "<group>";
 		};
 		86F204572B1A214100E8E841 /* AppDelegate */ = {

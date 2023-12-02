@@ -49,6 +49,7 @@ class PingIdentityEncryptMessageVC: UIViewController {
             self.showToast(message: StringConstants.GenericStrings.PleaseEnterText, font: .systemFont(ofSize: 12.0))
             return
         }
+        self.inputTextField.resignFirstResponder()
         self.generateRSAKeyPair()
     }
 }
