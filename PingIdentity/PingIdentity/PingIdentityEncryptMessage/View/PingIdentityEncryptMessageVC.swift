@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 
 class PingIdentityEncryptMessageVC: UIViewController {
+    
+    let viewModel = PingIdentityEncryptMessageViewModel()
     // InputTextField IBOutlet
     @IBOutlet weak var inputTextField: UITextField!
     // Payload
@@ -27,7 +29,7 @@ class PingIdentityEncryptMessageVC: UIViewController {
         navigationController?.navigationBar.isTranslucent = true
         isBiometricRequired = UserDefaults.standard.bool(forKey: StringConstants.UserDefaultKey.SwitchEnableAndDisable)
         isBiometricRequired ?  biometricEnableAndDisableSwitch.setOn(true, animated: false) : biometricEnableAndDisableSwitch.setOn(false, animated: false)
-
+        
     }
     
     deinit {
@@ -51,61 +53,67 @@ class PingIdentityEncryptMessageVC: UIViewController {
     }
 }
 
-
 extension PingIdentityEncryptMessageVC {
     
+    // MARK: - Generate RSA Key Pair
+    
     func generateRSAKeyPair(){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.0){
-            do {
-                let (privateKey, publicKey) = try  RSAHandler.shared.generateRSAKeyPair()
-                try PingIdentityKeyChainHandler.shared.saveKeyToKeychain(key: privateKey, identifier: StringConstants.KeyChainKey.Privatekey)
-                self.showToast(message: StringConstants.GenericStrings.KeyCreated, font: .systemFont(ofSize: 12.0))
-                self.encryptTextMessage(publicKey: publicKey)
-            }catch let error {
-                print(error.localizedDescription)
+        viewModel.generateRSAKeyPair { [weak self ](success , error) in
+            if success{
+                self?.showToast(message: StringConstants.GenericStrings.KeyCreated, font: .systemFont(ofSize: 12.0))
+                self?.encryptTextMessage()
+            }else{
+                
+            }
+            return
+        }
+    }
+    
+    // MARK: - Encrypt Text
+    
+    func encryptTextMessage(){
+        guard let publicKey = viewModel.rsaKeyDataSource?.publicKey else {return}
+        viewModel.encryptTextMessage(inputText: inputTextField.text ?? "", publicKey: publicKey){ [weak self] (success , error) in
+            if success{
+                self?.showToast(message: StringConstants.GenericStrings.MessageEncrpted, font: .systemFont(ofSize: 12.0))
+                self?.generateSecondRSAKeyPair()
+            }else{
+                
+            }
+            return
+        }
+    }
+    
+    // MARK: - Create Other Set of RSA Key for Signing and verifying
+    
+    func generateSecondRSAKeyPair(){
+        guard let encryptedData = viewModel.payloadDataSource?.encryptedData else {return}
+        viewModel.generateSecondRSAKeyPair(encryptedData: encryptedData) { [weak self] (success , error) in
+            if success{
+                self?.showToast(message: StringConstants.GenericStrings.SecondKeyCreated, font: .systemFont(ofSize: 12.0))
+                self?.signedData()
+            }else{
+                
             }
         }
     }
     
-    func encryptTextMessage(publicKey : SecKey){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
-            do {
-                let encryptedData = try  RSAHandler.shared.encryptRSA(Data((self.inputTextField.text ?? "").utf8), publicKey: publicKey)
-                self.showToast(message: StringConstants.GenericStrings.MessageEncrpted, font: .systemFont(ofSize: 12.0))
-                self.generateSecondRSAKeyPair(encryptedData: encryptedData)
-            }catch let error {
-                print(error.localizedDescription)
-            }
-        }
-    }
+    // MARK: - Signin Data
     
-    func generateSecondRSAKeyPair(encryptedData : Data){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
-            do {
-                let (secondPrivateKey, secondPublicKey) = try  RSAHandler.shared.generateRSAKeyPair()
-                try PingIdentityKeyChainHandler.shared.saveKeyToKeychain(key: secondPublicKey, identifier: StringConstants.KeyChainKey.secondPublicKey)
-                self.showToast(message: StringConstants.GenericStrings.SecondKeyCreated, font: .systemFont(ofSize: 12.0))
-                self.signedData(encryptedData: encryptedData, secondPrivateKey: secondPrivateKey)
-            }catch let error {
-                print(error.localizedDescription)
+    func signedData(){
+        guard let encryptedData = viewModel.payloadDataSource?.encryptedData , let secondPrivateKey = viewModel.secondRSAKeyDataSource?.privateKey else {return}
+        viewModel.signedData(encryptedData: encryptedData, secondPrivateKey: secondPrivateKey){ [weak self] (success , error) in
+            if success{
+                self?.showToast(message: StringConstants.GenericStrings.SignatureIsAdded, font: .systemFont(ofSize: 12.0))
+                if let signature = self?.viewModel.payloadDataSource?.signature{
+                    self?.payLoad = [StringConstants.JSONKey.EncryptedString : encryptedData , StringConstants.JSONKey.Signature : signature]
+                }
+            }else{
+                
             }
-        }
-    }
-    
-    func signedData(encryptedData : Data , secondPrivateKey : SecKey){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
-            do {
-                let signature = try  RSAHandler.shared.signData(encryptedData, privateKey: secondPrivateKey)
-                self.showToast(message: StringConstants.GenericStrings.SignatureIsAdded, font: .systemFont(ofSize: 12.0))
-                self.payLoad = [StringConstants.JSONKey.EncryptedString : encryptedData , StringConstants.JSONKey.Signature : signature]
-            }catch let error {
-                print(error.localizedDescription)
-            }
-            
         }
     }
 }
-
 
 extension PingIdentityEncryptMessageVC {
     

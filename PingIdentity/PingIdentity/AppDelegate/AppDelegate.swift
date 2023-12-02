@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         if let userInfo = response.notification.request.content.userInfo as? [String : Any]{
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0){
                 NotificationCenter.default.post(name:NSNotification.Name(StringConstants.PrefKey.NotificationTapPushMoveDecryptVC), object: nil , userInfo : userInfo)
             }
             completionHandler()

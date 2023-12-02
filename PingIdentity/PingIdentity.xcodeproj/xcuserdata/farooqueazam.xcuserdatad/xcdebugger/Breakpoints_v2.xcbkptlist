@@ -36,5 +36,148 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5B10F6F7-E514-4375-9913-CE25C26465DD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PingIdentity/PingIdentityEncryptMessage/View/PingIdentityEncryptMessageVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "encryptTextMessage()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "5B10F6F7-E514-4375-9913-CE25C26465DD - 70d83ef0dcf67751"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PingIdentity.PingIdentityEncryptMessageVC.encryptTextMessage1() -&gt; ()"
+                  moduleName = "PingIdentity"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/farooqueazam/Desktop/PingIdentityAssignment/PingIdentity/PingIdentity/PingIdentityEncryptMessage/View/PingIdentityEncryptMessageVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
+                  offsetFromSymbolStart = "76">
+               </Location>
+               <Location
+                  uuid = "5B10F6F7-E514-4375-9913-CE25C26465DD - 70d83ef0dcf67770"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PingIdentity.PingIdentityEncryptMessageVC.encryptTextMessage1() -&gt; ()"
+                  moduleName = "PingIdentity"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/farooqueazam/Desktop/PingIdentityAssignment/PingIdentity/PingIdentity/PingIdentityEncryptMessage/View/PingIdentityEncryptMessageVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "76">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C8EEB55F-FBEF-4867-BCFB-ED360FB6EA61"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PingIdentity/PingIdentityEncryptMessage/View/PingIdentityEncryptMessageVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "generateSecondRSAKeyPair()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C8EEB55F-FBEF-4867-BCFB-ED360FB6EA61 - 26b2af074152b67f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PingIdentity.PingIdentityEncryptMessageVC.generateSecondRSAKeyPair1() -&gt; ()"
+                  moduleName = "PingIdentity"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/farooqueazam/Desktop/PingIdentityAssignment/PingIdentity/PingIdentity/PingIdentityEncryptMessage/View/PingIdentityEncryptMessageVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "83"
+                  endingLineNumber = "83"
+                  offsetFromSymbolStart = "276">
+               </Location>
+               <Location
+                  uuid = "C8EEB55F-FBEF-4867-BCFB-ED360FB6EA61 - 57bd97d69d6cfb61"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool, Swift.Optional&lt;Swift.String&gt;) -&gt; () in PingIdentity.PingIdentityEncryptMessageVC.generateSecondRSAKeyPair1() -&gt; ()"
+                  moduleName = "PingIdentity"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/farooqueazam/Desktop/PingIdentityAssignment/PingIdentity/PingIdentity/PingIdentityEncryptMessage/View/PingIdentityEncryptMessageVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "83"
+                  endingLineNumber = "83"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "C8EEB55F-FBEF-4867-BCFB-ED360FB6EA61 - 26b2af074152b65c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PingIdentity.PingIdentityEncryptMessageVC.generateSecondRSAKeyPair1() -&gt; ()"
+                  moduleName = "PingIdentity"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/farooqueazam/Desktop/PingIdentityAssignment/PingIdentity/PingIdentity/PingIdentityEncryptMessage/View/PingIdentityEncryptMessageVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "84"
+                  endingLineNumber = "84"
+                  offsetFromSymbolStart = "44">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "48949079-1B68-4E50-A5F6-DA2AB4270E35"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PingIdentity/PingIdentityEncryptMessage/View/PingIdentityEncryptMessageVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "generateRSAKeyPair()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D544C08B-F11C-450F-BD20-72651F4F113F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PingIdentity/PingIdentityEncryptMessage/View/PingIdentityEncryptMessageVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
+            landmarkName = "signedData()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

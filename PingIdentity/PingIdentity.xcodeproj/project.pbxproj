@@ -21,6 +21,8 @@
 		86D902A72B183CBA00D3C793 /* PingIdentityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D902A62B183CBA00D3C793 /* PingIdentityTests.swift */; };
 		86D902B12B183CBA00D3C793 /* PingIdentityUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D902B02B183CBA00D3C793 /* PingIdentityUITests.swift */; };
 		86D902B32B183CBA00D3C793 /* PingIdentityUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D902B22B183CBA00D3C793 /* PingIdentityUITestsLaunchTests.swift */; };
+		86EF6ACA2B1B74AB00826C6A /* PingIdentityEncryptMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF6AC92B1B74AB00826C6A /* PingIdentityEncryptMessageViewModel.swift */; };
+		86EF6ACC2B1B767700826C6A /* PingIdentityRSAKeyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF6ACB2B1B767700826C6A /* PingIdentityRSAKeyModel.swift */; };
 		86F2045C2B1A3DD000E8E841 /* PingIdentityDecryptMessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F2045B2B1A3DD000E8E841 /* PingIdentityDecryptMessageVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +64,8 @@
 		86D902B22B183CBA00D3C793 /* PingIdentityUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingIdentityUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		86D902C22B1845D400D3C793 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		86D902E82B18CDD800D3C793 /* CryptoKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoKit.framework; path = System/Library/Frameworks/CryptoKit.framework; sourceTree = SDKROOT; };
+		86EF6AC92B1B74AB00826C6A /* PingIdentityEncryptMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingIdentityEncryptMessageViewModel.swift; sourceTree = "<group>"; };
+		86EF6ACB2B1B767700826C6A /* PingIdentityRSAKeyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingIdentityRSAKeyModel.swift; sourceTree = "<group>"; };
 		86F2045B2B1A3DD000E8E841 /* PingIdentityDecryptMessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingIdentityDecryptMessageVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,7 +97,9 @@
 		8671C79B2B1AF3C6004A3FA9 /* PingIdentityEncryptMessage */ = {
 			isa = PBXGroup;
 			children = (
-				86D902932B183CB900D3C793 /* PingIdentityEncryptMessageVC.swift */,
+				86EF6AC82B1B73DE00826C6A /* Model */,
+				86EF6AC62B1B73BE00826C6A /* View */,
+				86EF6AC72B1B73CB00826C6A /* ViewModel */,
 			);
 			path = PingIdentityEncryptMessage;
 			sourceTree = "<group>";
@@ -171,9 +177,9 @@
 			isa = PBXGroup;
 			children = (
 				86F204572B1A214100E8E841 /* AppDelegate */,
-				8671C7AA2B1B4024004A3FA9 /* LocalNotificationManager */,
-				8671C7A72B1B3109004A3FA9 /* StringConstant */,
 				8671C79D2B1AF80F004A3FA9 /* Extensions */,
+				8671C7A72B1B3109004A3FA9 /* StringConstant */,
+				8671C7AA2B1B4024004A3FA9 /* LocalNotificationManager */,
 				8671C7A42B1B06AD004A3FA9 /* KeyChainHandler */,
 				8671C7A12B1AFEA3004A3FA9 /* RSAHandler */,
 				8671C79B2B1AF3C6004A3FA9 /* PingIdentityEncryptMessage */,
@@ -210,6 +216,30 @@
 				86D902C22B1845D400D3C793 /* Security.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		86EF6AC62B1B73BE00826C6A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				86D902932B183CB900D3C793 /* PingIdentityEncryptMessageVC.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		86EF6AC72B1B73CB00826C6A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				86EF6AC92B1B74AB00826C6A /* PingIdentityEncryptMessageViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		86EF6AC82B1B73DE00826C6A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				86EF6ACB2B1B767700826C6A /* PingIdentityRSAKeyModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		86F204572B1A214100E8E841 /* AppDelegate */ = {
@@ -358,7 +388,9 @@
 				86D902902B183CB900D3C793 /* AppDelegate.swift in Sources */,
 				8671C7A32B1AFF00004A3FA9 /* RSAHandler.swift in Sources */,
 				86F2045C2B1A3DD000E8E841 /* PingIdentityDecryptMessageVC.swift in Sources */,
+				86EF6ACA2B1B74AB00826C6A /* PingIdentityEncryptMessageViewModel.swift in Sources */,
 				8671C7AC2B1B404E004A3FA9 /* LocalNotificationManager.swift in Sources */,
+				86EF6ACC2B1B767700826C6A /* PingIdentityRSAKeyModel.swift in Sources */,
 				86D902922B183CB900D3C793 /* SceneDelegate.swift in Sources */,
 				8671C7A62B1B06D0004A3FA9 /* PingIdentityKeyChainHandler.swift in Sources */,
 			);
@@ -545,7 +577,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -574,7 +606,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
