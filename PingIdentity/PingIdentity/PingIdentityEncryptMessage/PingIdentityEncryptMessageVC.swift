@@ -16,6 +16,7 @@ class PingIdentityEncryptMessageVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        inputTextField.delegate = self
         inputTextField.setLeftPaddingPoints(16)
     }
 }
