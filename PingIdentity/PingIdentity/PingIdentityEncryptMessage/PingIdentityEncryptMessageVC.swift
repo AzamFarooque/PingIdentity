@@ -13,7 +13,9 @@ class PingIdentityEncryptMessageVC: UIViewController {
     @IBOutlet weak var inputTextField: UITextField!
     // Payload
     var payLoad : [String : Any]?
+    var isBiometricRequired : Bool = false
     
+    @IBOutlet weak var biometricEnableAndDisableSwitch: UISwitch!
     // MARK: - viewDidLoad Method
     
     override func viewDidLoad() {
@@ -23,6 +25,8 @@ class PingIdentityEncryptMessageVC: UIViewController {
         inputTextField.delegate = self
         inputTextField.setLeftPaddingPoints(16)
         navigationController?.navigationBar.isTranslucent = true
+        isBiometricRequired = UserDefaults.standard.bool(forKey: StringConstants.UserDefaultKey.SwitchEnableAndDisable)
+        isBiometricRequired ?  biometricEnableAndDisableSwitch.setOn(true, animated: false) : biometricEnableAndDisableSwitch.setOn(false, animated: false)
 
     }
     
@@ -31,6 +35,11 @@ class PingIdentityEncryptMessageVC: UIViewController {
     }
     
     // MARK: - Button touch action
+    
+    @IBAction func didTapToEnableAndDisableFaceId(_ sender: UISwitch) {
+        sender.isOn ? UserDefaults.standard.set(true , forKey: StringConstants.UserDefaultKey.SwitchEnableAndDisable) : UserDefaults.standard.set(false , forKey: StringConstants.UserDefaultKey.SwitchEnableAndDisable)
+        isBiometricRequired = UserDefaults.standard.bool(forKey: StringConstants.UserDefaultKey.SwitchEnableAndDisable)
+    }
     
     @IBAction func didTapToSend(_ sender: Any) {
         PingIdentityKeyChainHandler.shared.removeAllKey()
@@ -162,7 +171,7 @@ extension PingIdentityEncryptMessageVC {
     
     @objc func pushToDecryptMessageVC(notification:Notification) {
         if let userInfo = notification.userInfo as? [String : Any]{
-            let vc = PingIdentityDecryptMessageVC(userInfo:  userInfo)
+            let vc = PingIdentityDecryptMessageVC(userInfo:  userInfo , isBiometricRequired: isBiometricRequired)
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

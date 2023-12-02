@@ -35,6 +35,10 @@ struct StringConstants {
         static let NotificationTapPushMoveDecryptVC = "NotificationTapPushMoveDecryptVC"
     }
     
+    struct UserDefaultKey {
+        static let SwitchEnableAndDisable = "switchEnableAndDisable"
+    }
+    
     struct KeyChainKey {
         static let Privatekey = "com.example.privatekey"
         static let secondPublicKey = "com.example.secondPublicKey"

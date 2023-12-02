@@ -15,10 +15,14 @@ class PingIdentityDecryptMessageVC: UIViewController {
     
     // MARK: - init
     
-    init(userInfo : [String : Any]) {
+    init(userInfo : [String : Any] , isBiometricRequired : Bool) {
         super.init(nibName: nil, bundle: nil)
         self.userInfo = userInfo
-        authorise()
+        if isBiometricRequired{
+            authorise()
+        }else{
+            verifySignature()
+        }
     }
     
     // MARK: - Required init
