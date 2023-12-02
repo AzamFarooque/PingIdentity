@@ -8,19 +8,23 @@
 import Foundation
 import UIKit
 
-class ViewController: UIViewController {
-    
-    
+class PingIdentityEncryptMessageVC: UIViewController {
+    // InputTextField IBOutlet
     @IBOutlet weak var inputTextField: UITextField!
+    
+    // MARK: - viewDidLoad Method
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        inputTextField.setLeftPaddingPoints(16)
     }
 }
-  
-extension ViewController : UITextFieldDelegate{
+
+// TextField delegates method implementaion in extesnion
+extension PingIdentityEncryptMessageVC : UITextFieldDelegate{
    
+    // MARK: - Textfield ShouldReturn
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false

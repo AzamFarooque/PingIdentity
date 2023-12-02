@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8671C79F2B1AF823004A3FA9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8671C79E2B1AF823004A3FA9 /* Extensions.swift */; };
 		86D902902B183CB900D3C793 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9028F2B183CB900D3C793 /* AppDelegate.swift */; };
 		86D902922B183CB900D3C793 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D902912B183CB900D3C793 /* SceneDelegate.swift */; };
-		86D902942B183CB900D3C793 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D902932B183CB900D3C793 /* ViewController.swift */; };
+		86D902942B183CB900D3C793 /* PingIdentityEncryptMessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D902932B183CB900D3C793 /* PingIdentityEncryptMessageVC.swift */; };
 		86D902972B183CB900D3C793 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86D902952B183CB900D3C793 /* Main.storyboard */; };
 		86D902992B183CBA00D3C793 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86D902982B183CBA00D3C793 /* Assets.xcassets */; };
 		86D9029C2B183CBA00D3C793 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86D9029A2B183CBA00D3C793 /* LaunchScreen.storyboard */; };
@@ -37,10 +38,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8671C79E2B1AF823004A3FA9 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		86D9028C2B183CB900D3C793 /* PingIdentity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PingIdentity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86D9028F2B183CB900D3C793 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86D902912B183CB900D3C793 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		86D902932B183CB900D3C793 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		86D902932B183CB900D3C793 /* PingIdentityEncryptMessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingIdentityEncryptMessageVC.swift; sourceTree = "<group>"; };
 		86D902962B183CB900D3C793 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		86D902982B183CBA00D3C793 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		86D9029B2B183CBA00D3C793 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -83,7 +85,7 @@
 		8671C79B2B1AF3C6004A3FA9 /* PingIdentityEncryptMessage */ = {
 			isa = PBXGroup;
 			children = (
-				86D902932B183CB900D3C793 /* ViewController.swift */,
+				86D902932B183CB900D3C793 /* PingIdentityEncryptMessageVC.swift */,
 			);
 			path = PingIdentityEncryptMessage;
 			sourceTree = "<group>";
@@ -94,6 +96,14 @@
 				86F2045B2B1A3DD000E8E841 /* PingIdentityDecryptMessageVC.swift */,
 			);
 			path = PingIdentityDecryptMessage;
+			sourceTree = "<group>";
+		};
+		8671C79D2B1AF80F004A3FA9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8671C79E2B1AF823004A3FA9 /* Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		86D902832B183CB900D3C793 = {
@@ -120,6 +130,7 @@
 		86D9028E2B183CB900D3C793 /* PingIdentity */ = {
 			isa = PBXGroup;
 			children = (
+				8671C79D2B1AF80F004A3FA9 /* Extensions */,
 				86F204572B1A214100E8E841 /* AppDelegate */,
 				8671C79B2B1AF3C6004A3FA9 /* PingIdentityEncryptMessage */,
 				8671C79C2B1AF3E9004A3FA9 /* PingIdentityDecryptMessage */,
@@ -297,7 +308,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86D902942B183CB900D3C793 /* ViewController.swift in Sources */,
+				8671C79F2B1AF823004A3FA9 /* Extensions.swift in Sources */,
+				86D902942B183CB900D3C793 /* PingIdentityEncryptMessageVC.swift in Sources */,
 				86D902902B183CB900D3C793 /* AppDelegate.swift in Sources */,
 				86F2045C2B1A3DD000E8E841 /* PingIdentityDecryptMessageVC.swift in Sources */,
 				86D902922B183CB900D3C793 /* SceneDelegate.swift in Sources */,

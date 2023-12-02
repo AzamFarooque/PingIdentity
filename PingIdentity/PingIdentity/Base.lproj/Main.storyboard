@@ -12,21 +12,21 @@
         <!--Home-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="PingIdentity" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="PingIdentityEncryptMessageVC" customModule="PingIdentity" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1ZA-K9-9fd">
-                                <rect key="frame" x="16" y="253" width="361" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Please Enter Text" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1ZA-K9-9fd">
+                                <rect key="frame" x="16" y="215" width="361" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="ddK-32-Fgs"/>
+                                    <constraint firstAttribute="height" constant="40" id="ddK-32-Fgs"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NBy-5E-plt">
-                                <rect key="frame" x="121.66666666666669" y="311" width="150" height="35"/>
+                                <rect key="frame" x="121.66666666666669" y="279" width="150" height="35"/>
                                 <color key="backgroundColor" red="0.2470588235" green="0.78823529410000004" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="EXA-J2-ewd"/>
@@ -37,27 +37,41 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EWs-jE-421">
+                                <rect key="frame" x="330" y="119" width="49" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="5ym-PL-uxp"/>
+                                    <constraint firstAttribute="width" constant="47" id="Hte-eb-Bej"/>
+                                </constraints>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Face id enabled" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WL4-2C-ohs">
+                                <rect key="frame" x="16" y="124" width="298" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="bSE-bY-RfN"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="1ZA-K9-9fd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="9ME-hh-1Lc"/>
+                            <constraint firstItem="EWs-jE-421" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="9NF-1d-cXS"/>
                             <constraint firstItem="NBy-5E-plt" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KSI-JD-PVH"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1ZA-K9-9fd" secondAttribute="trailing" constant="16" id="LWJ-1D-cKp"/>
-                            <constraint firstItem="1ZA-K9-9fd" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="150" id="MXs-QT-5jp"/>
+                            <constraint firstItem="WL4-2C-ohs" firstAttribute="centerY" secondItem="EWs-jE-421" secondAttribute="centerY" id="P7w-lb-wke"/>
                             <constraint firstItem="NBy-5E-plt" firstAttribute="top" secondItem="1ZA-K9-9fd" secondAttribute="bottom" constant="24" id="ciK-dn-HfA"/>
+                            <constraint firstItem="WL4-2C-ohs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="dcq-ie-36z"/>
+                            <constraint firstItem="EWs-jE-421" firstAttribute="leading" secondItem="WL4-2C-ohs" secondAttribute="trailing" constant="16" id="lcE-J8-TuS"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="EWs-jE-421" secondAttribute="trailing" constant="16" id="q78-bi-p2r"/>
+                            <constraint firstItem="1ZA-K9-9fd" firstAttribute="top" secondItem="WL4-2C-ohs" secondAttribute="bottom" constant="70" id="sNL-3M-juq"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Home" id="NxB-ML-pyl">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="sHw-YM-5RI">
-                            <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="j0S-XL-hcL">
-                                <rect key="frame" x="326" y="6.6666666666666679" width="51" height="31.000000000000004"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </switch>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Home" id="NxB-ML-pyl"/>
                     <connections>
-                        <outlet property="inputTextField" destination="1ZA-K9-9fd" id="ja1-Vl-BQX"/>
+                        <outlet property="inputTextField" destination="1ZA-K9-9fd" id="r6x-a7-Qp9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
