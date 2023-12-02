@@ -13,17 +13,17 @@ class PingIdentityEncryptMessageVC: UIViewController {
     @IBOutlet weak var inputTextField: UITextField!
     // Payload
     var payLoad : [String : Any]?
-    var textMessage = ""
-    let current = UNUserNotificationCenter.current()
     
     // MARK: - viewDidLoad Method
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        askForNotificationPermission()
+        LocalNotificationManager.askForNotificationPermission()
         notificationAddObservers()
         inputTextField.delegate = self
         inputTextField.setLeftPaddingPoints(16)
+        navigationController?.navigationBar.isTranslucent = true
+
     }
     
     deinit {
@@ -33,12 +33,11 @@ class PingIdentityEncryptMessageVC: UIViewController {
     // MARK: - Button touch action
     
     @IBAction func didTapToSend(_ sender: Any) {
-        removeKey()
+        PingIdentityKeyChainHandler.shared.removeAllKey()
         if self.inputTextField.text?.isEmpty ?? false{
             self.showToast(message: StringConstants.GenericStrings.PleaseEnterText, font: .systemFont(ofSize: 12.0))
             return
         }
-        self.textMessage = self.inputTextField.text ?? ""
         self.generateRSAKeyPair()
     }
 }
@@ -62,7 +61,7 @@ extension PingIdentityEncryptMessageVC {
     func encryptTextMessage(publicKey : SecKey){
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
             do {
-                let encryptedData = try  RSAHandler.shared.encryptRSA(Data(self.textMessage.utf8), publicKey: publicKey)
+                let encryptedData = try  RSAHandler.shared.encryptRSA(Data((self.inputTextField.text ?? "").utf8), publicKey: publicKey)
                 self.showToast(message: StringConstants.GenericStrings.MessageEncrpted, font: .systemFont(ofSize: 12.0))
                 self.generateSecondRSAKeyPair(encryptedData: encryptedData)
             }catch let error {
@@ -104,27 +103,18 @@ extension PingIdentityEncryptMessageVC {
     // MARK: - Notification Observer
     
     private func notificationAddObservers(){
+        // Notification observer for NotificationTapPushMoveDecryptVC
+        NotificationCenter.default.addObserver(self, selector: #selector(self.pushToDecryptMessageVC(notification:)), name:NSNotification.Name(StringConstants.PrefKey.NotificationTapPushMoveDecryptVC), object: nil)
+        
         // Notification observer for AppDidEnterBackground
         NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterBackground), name: Notification.Name(StringConstants.PrefKey.AppDidEnterBackground), object: nil)
+        
         // Notification observer for AppWillTerminate
         NotificationCenter.default.addObserver(self, selector: #selector(appWillTerminate), name: Notification.Name(StringConstants.PrefKey.AppWillTerminate), object: nil)
     }
     
 }
 
-extension PingIdentityEncryptMessageVC {
-    
-    // MARK: Deleting Saved Priavte and Public key which saved in key chain
-    
-    func removeKey(){
-        do {
-            try PingIdentityKeyChainHandler.shared.removeKeyFromKeychain(identifier: StringConstants.KeyChainKey.Privatekey)
-            try PingIdentityKeyChainHandler.shared.removeKeyFromKeychain(identifier: StringConstants.KeyChainKey.secondPublicKey)
-        }catch let error {
-            print("removeKeyFromKeychain :" , error.localizedDescription)
-        }
-    }
-}
 
 // TextField delegates method implementaion in extesnion
 extension PingIdentityEncryptMessageVC : UITextFieldDelegate{
@@ -143,12 +133,14 @@ extension PingIdentityEncryptMessageVC {
     // MARK: - This method triggers when aap move to background
     
     @objc func appDidEnterBackground() {
+        print("Background")
         scheduleBackgroundTask()
     }
     
     // MARK: - This method triggers when aap terminated
     
     @objc func appWillTerminate() {
+        print("Terminated")
         scheduleBackgroundTask()
     }
     
@@ -156,42 +148,23 @@ extension PingIdentityEncryptMessageVC {
     // After delay of 15 sec
     
     func scheduleBackgroundTask() {
-        let delayInSeconds = 1.0
+        guard let payload = payLoad else {return}
+        let delayInSeconds = 0.0
         DispatchQueue.main.asyncAfter(deadline: .now() + delayInSeconds) {
-            self.sendLocalPushNotification(payload: self.payLoad!)
+            LocalNotificationManager.sendLocalPushNotification(payload: payload)
         }
     }
 }
 
 extension PingIdentityEncryptMessageVC {
     
-    // MARK: - Notification permsission
+    // MARK: - Navigate to second vc on push notification tap
     
-    func askForNotificationPermission(){
-        current.requestAuthorization(options: [.badge , .sound, .alert]) {  (granted , error) in
-            if error == nil {
-                print("Notificarion Granted")
-            }
+    @objc func pushToDecryptMessageVC(notification:Notification) {
+        if let userInfo = notification.userInfo as? [String : Any]{
+            let vc = PingIdentityDecryptMessageVC(userInfo:  userInfo)
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     
-    // MARK: - Construct and send local notification
-    
-    func sendLocalPushNotification(payload: [String : Any]) {
-        let content = UNMutableNotificationContent()
-        content.title = StringConstants.Notification.TitleText
-        content.body = StringConstants.Notification.BodyText
-        content.userInfo = [StringConstants.JSONKey.Payload: payload]
-        
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 2, repeats: false)
-        let uuid = UUID().uuidString
-        let request = UNNotificationRequest(identifier: uuid , content: content, trigger: trigger)
-        
-        current.add(request) { error in
-            if let error = error {
-                print("Error scheduling local push notification: \(error)")
-            }
-        }
-    }
 }
-

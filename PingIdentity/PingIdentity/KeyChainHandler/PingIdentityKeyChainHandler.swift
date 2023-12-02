@@ -72,6 +72,17 @@ final class PingIdentityKeyChainHandler {
         }
     }
     
+    // MARK: Deleting Saved Priavte and Public key which saved in key chain
+    
+    func removeAllKey(){
+        do {
+            try PingIdentityKeyChainHandler.shared.removeKeyFromKeychain(identifier: StringConstants.KeyChainKey.Privatekey)
+            try PingIdentityKeyChainHandler.shared.removeKeyFromKeychain(identifier: StringConstants.KeyChainKey.secondPublicKey)
+        }catch let error {
+            print("removeKeyFromKeychain :" , error.localizedDescription)
+        }
+    }
+    
 }
 
 // Enum to represent Keychain-related errors

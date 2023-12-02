@@ -16,7 +16,11 @@ struct StringConstants {
         static let MessageEncrpted = "Message Encrpted"
         static let SecondKeyCreated = "Second Key Created"
         static let SignatureIsAdded = "Signature is Added"
+        static let SignatureVerified =  "Signature Verified"
+        static let SignatureNotVerified =  "Signature Not Verified"
+        static let TextDecrypted =  "Text Decrypted"
         static let TimeerCreatedForFifteenSec = "Timer Created for 15 sec"
+        static let FaceIdAuthoriseText = "Please authorise with touch id"
         
     }
     
@@ -28,6 +32,7 @@ struct StringConstants {
     struct PrefKey {
         static let AppWillTerminate = "AppWillTerminate"
         static let AppDidEnterBackground = "AppDidEnterBackground"
+        static let NotificationTapPushMoveDecryptVC = "NotificationTapPushMoveDecryptVC"
     }
     
     struct KeyChainKey {
