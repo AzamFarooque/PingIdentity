@@ -127,7 +127,6 @@ extension PingIdentityEncryptMessageVC {
                     self?.showToast(message: errorMessage, font: .systemFont(ofSize: 12.0))
                 }
             }
-            return
         }
     }
     
@@ -142,9 +141,10 @@ extension PingIdentityEncryptMessageVC {
                 HapticTouch.addHapticTouch(style: .light)
                 self?.generateSecondRSAKeyPair()
             }else{
-                
+                if let errorMessage = error{
+                    self?.showToast(message: errorMessage, font: .systemFont(ofSize: 12.0))
+                }
             }
-            return
         }
     }
     
@@ -159,7 +159,9 @@ extension PingIdentityEncryptMessageVC {
                 HapticTouch.addHapticTouch(style: .light)
                 self?.signedData()
             }else{
-                
+                if let errorMessage = error{
+                    self?.showToast(message: errorMessage, font: .systemFont(ofSize: 12.0))
+                }
             }
         }
     }
@@ -177,7 +179,9 @@ extension PingIdentityEncryptMessageVC {
                     self?.payLoad = [StringConstants.JSONKey.EncryptedString : encryptedData , StringConstants.JSONKey.Signature : signature]
                 }
             }else{
-                
+                if let errorMessage = error{
+                    self?.showToast(message: errorMessage, font: .systemFont(ofSize: 12.0))
+                }
             }
         }
     }

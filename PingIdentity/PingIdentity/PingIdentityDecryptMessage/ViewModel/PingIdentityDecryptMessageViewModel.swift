@@ -27,11 +27,11 @@ class PingIdentityDecryptMessageViewModel{
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0){
             let encryptedString = payload[StringConstants.JSONKey.EncryptedString]
             let signature = payload[StringConstants.JSONKey.Signature]
-            if let encrpt = encryptedString , let sig = signature {
+            if let encrpt = encryptedString as? Data , let sig = signature as? Data {
                 do{
                     // Verify the signature using the stored public key
                     let secondPublicKey = try PingIdentityKeyChainHandler.shared.getKeyFromKeychain(identifier: StringConstants.KeyChainKey.secondPublicKey)
-                    let isSignatureValid = RSAHandler.shared.verifySignature(encrpt as! Data, signature: sig as! Data, publicKey: secondPublicKey)
+                    let isSignatureValid = RSAHandler.shared.verifySignature(encrpt , signature: sig , publicKey: secondPublicKey)
                     if isSignatureValid{
                         oncompletion(true , nil)
                     }else{

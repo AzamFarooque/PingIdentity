@@ -160,7 +160,9 @@ extension PingIdentityDecryptMessageVC{
                     self?.showToast(message: StringConstants.GenericStrings.TextDecrypted, font: .systemFont(ofSize: 12.0))
                     self?.decryptMessageLbl.text = self?.viewModel.decryptMessageDataSource?.decryptMessage
                 }else{
-                    // Decryption failed
+                    if let errorMessage = error{
+                        self?.showToast(message: errorMessage, font: .systemFont(ofSize: 12.0))
+                    }
                 }
             }
         }
