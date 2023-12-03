@@ -253,32 +253,32 @@ extension PingIdentityEncryptMessageVC {
     
     /// This method is triggered when the app moves to the background.
     @objc private func appDidEnterBackground() {
-        
         // Schedule a background task to send a local notification
-        scheduleBackgroundTask()
+        scheduleBackgroundTask(delay : 15)
     }
     
     // MARK: - Application Will Terminate
     
     /// This method is triggered when the app is terminated.
     @objc private func appWillTerminate() {
-        
         // Schedule a background task to send a local notification
-        scheduleBackgroundTask()
+        scheduleBackgroundTask(delay : 15)
     }
     
     // MARK: - Scheduled Background Task
     
     /// Schedules a background task to send a local notification after a delay of 15 seconds.
-    private func scheduleBackgroundTask() {
+    private func scheduleBackgroundTask(delay : TimeInterval) {
         // Ensure that there is a payload to include in the notification
-        guard let payload = payLoad else {return}
+        guard let payload = self.payLoad else {return}
         
-        // Send a local push notification with the provided payload
-        LocalNotificationManager.sendLocalPushNotification(payload: payload , delay: 15)
-        
-        // Clear the payload after sending the notification
-        self.payLoad = nil
+        DispatchQueue.global(qos: .background).async{
+            // Send a local push notification with the provided payload
+            LocalNotificationManager.sendLocalPushNotification(payload: payload , delay: delay)
+            
+            // Clear the payload after sending the notification
+            self.payLoad = nil
+        }
     }
 }
 
