@@ -30,7 +30,7 @@ class PingIdentityEncryptMessageVC: UIViewController {
     // Payload
     private var payLoad : [String : Any]?
     // Flag to check biometric enabled or disabled
-    private var isBiometricRequired : Bool = false
+    private var isBiometricEnabled : Bool = false
     
     
     // MARK: - View Lifecycle
@@ -50,10 +50,8 @@ class PingIdentityEncryptMessageVC: UIViewController {
         // Configuring navigation bar
         navigationController?.navigationBar.isTranslucent = true
         
-        // Checking biometric requirement status
-        isBiometricRequired = UserDefaults.standard.bool(forKey: StringConstants.UserDefaultKey.SwitchEnableAndDisable)
-        isBiometricRequired ?  biometricEnableAndDisableSwitch.setOn(true, animated: false) : biometricEnableAndDisableSwitch.setOn(false, animated: false)
-        biometricEnableAndDisabledLbl.text = isBiometricRequired ? StringConstants.GenericStrings.BiometricEnabledText : StringConstants.GenericStrings.BiometricDisableText
+        // Check and update the UI components related to biometric settings based on user preferences.
+        updateBiometricUIBasedOnUserPreferences()
         
         // Configuring button appearance
         sendButton.layer.cornerRadius = 8
@@ -73,11 +71,11 @@ class PingIdentityEncryptMessageVC: UIViewController {
         // Updating user defaults based on switch state
         sender.isOn ? UserDefaults.standard.set(true , forKey: StringConstants.UserDefaultKey.SwitchEnableAndDisable) : UserDefaults.standard.set(false , forKey: StringConstants.UserDefaultKey.SwitchEnableAndDisable)
         
-        // Updating isBiometricRequired based on switch state
-        isBiometricRequired = UserDefaults.standard.bool(forKey: StringConstants.UserDefaultKey.SwitchEnableAndDisable)
+        // Updating isBiometricEnabled based on switch state
+        isBiometricEnabled = UserDefaults.standard.bool(forKey: StringConstants.UserDefaultKey.SwitchEnableAndDisable)
         
         // Updating biometricEnableAndDisabledLbl based on switch state
-        biometricEnableAndDisabledLbl.text = isBiometricRequired ? StringConstants.GenericStrings.BiometricEnabledText : StringConstants.GenericStrings.BiometricDisableText
+        biometricEnableAndDisabledLbl.text = isBiometricEnabled ? StringConstants.GenericStrings.BiometricEnabledText : StringConstants.GenericStrings.BiometricDisableText
     }
     
     // MARK: - Button Touch Action
@@ -194,6 +192,23 @@ extension PingIdentityEncryptMessageVC {
     }
 }
 
+// MARK: Biometric UI Update
+
+extension PingIdentityEncryptMessageVC {
+    
+    /// Updates the UI components related to biometric settings based on user preferences.
+    func updateBiometricUIBasedOnUserPreferences(){
+        // Retrieve the biometric enable/disable status from UserDefaults
+        isBiometricEnabled = UserDefaults.standard.bool(forKey: StringConstants.UserDefaultKey.SwitchEnableAndDisable)
+        
+        // Set the state of the biometric enable/disable switch based on the retrieved status
+        isBiometricEnabled ?  biometricEnableAndDisableSwitch.setOn(true, animated: false) : biometricEnableAndDisableSwitch.setOn(false, animated: false)
+        
+        // Update the label text based on the biometric enable/disable status
+        biometricEnableAndDisabledLbl.text = isBiometricEnabled ? StringConstants.GenericStrings.BiometricEnabledText : StringConstants.GenericStrings.BiometricDisableText
+    }
+}
+
 // MARK: - Notification Observers
 
 extension PingIdentityEncryptMessageVC {
@@ -279,7 +294,7 @@ extension PingIdentityEncryptMessageVC {
         // Check if the notification contains user information
         if let userInfo = notification.userInfo as? [String : Any]{
             // Create an instance of PingIdentityDecryptMessageVC with user information and biometric requirement status
-            let vc = PingIdentityDecryptMessageVC(userInfo:  userInfo , isBiometricRequired: isBiometricRequired)
+            let vc = PingIdentityDecryptMessageVC(userInfo:  userInfo , isBiometricEnabled: isBiometricEnabled)
             
             // Push the second view controller onto the navigation stack
             self.navigationController?.pushViewController(vc, animated: true)

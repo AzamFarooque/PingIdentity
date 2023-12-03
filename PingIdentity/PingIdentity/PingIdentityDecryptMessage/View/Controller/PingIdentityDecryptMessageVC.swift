@@ -23,12 +23,12 @@ class PingIdentityDecryptMessageVC: UIViewController {
     
     // MARK: - Initialization
     
-    init(userInfo : [String : Any] , isBiometricRequired : Bool) {
+    init(userInfo : [String : Any] , isBiometricEnabled : Bool) {
         super.init(nibName: nil, bundle: nil)
         self.userInfo = userInfo
-        if isBiometricRequired{
+        if isBiometricEnabled{
             // Authorize using Face ID if required
-            authorise()
+            biometricAuthorise()
         }else{
             // Proceed to verify signature if Face ID is not required
             verifySignature()
@@ -82,7 +82,7 @@ extension PingIdentityDecryptMessageVC {
     private func setUpDecryptMessageLabel(){
         decryptMessageLbl.textAlignment = .center
         decryptMessageLbl.numberOfLines = 0
-        decryptMessageLbl.font = .boldSystemFont(ofSize: 15)
+        decryptMessageLbl.font = .boldSystemFont(ofSize: 40)
         decryptMessageLbl.textColor = .black
         view.addSubview(decryptMessageLbl)
         decryptMessageLbl.translatesAutoresizingMaskIntoConstraints = false
@@ -112,7 +112,7 @@ extension PingIdentityDecryptMessageVC {
     
     // MARK: - Face ID Authorization
     
-    private func authorise(){
+    private func biometricAuthorise(){
         let context = LAContext()
         var error : NSError? = nil
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error){
