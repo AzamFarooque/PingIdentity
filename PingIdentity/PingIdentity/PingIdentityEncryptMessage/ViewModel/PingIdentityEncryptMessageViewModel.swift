@@ -25,25 +25,23 @@ class PingIdentityEncryptMessageViewModel{
     /// Generates an RSA key pair and saves the private key to the keychain.
     ///
     /// - Parameter oncompletion: The completion closure indicating the success or failure of the operation.
-    func generateRSAKeyPair(oncompletion : @escaping oncompletion){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.0){
-            do {
-                // Generate RSA key pair
-                let (privateKey, publicKey) = try  RSAHandler.shared.generateRSAKeyPair()
-                
-                // Save private key to the keychain
-                try PingIdentityKeyChainHandler.shared.saveKeyToKeychain(key: privateKey, identifier: StringConstants.KeyChainKey.Privatekey)
-                
-                // Update the data source with the RSA key pair
-                self.rsaKeyDataSource = PingIdentityRSAKeyModel(publicKey: publicKey, privateKey: privateKey)
-                
-                // Notify completion with success
-                oncompletion(true , nil)
-            }catch let error {
-                // Notify completion with error description
-                print(error.localizedDescription)
-                oncompletion(false , error.localizedDescription)
-            }
+    func generateRSAKeyPair(oncompletion : oncompletion){
+        do {
+            // Generate RSA key pair
+            let (privateKey, publicKey) = try  RSAHandler.shared.generateRSAKeyPair()
+            
+            // Save private key to the keychain
+            try PingIdentityKeyChainHandler.shared.saveKeyToKeychain(key: privateKey, identifier: StringConstants.KeyChainKey.Privatekey)
+            
+            // Update the data source with the RSA key pair
+            self.rsaKeyDataSource = PingIdentityRSAKeyModel(publicKey: publicKey, privateKey: privateKey)
+            
+            // Notify completion with success
+            oncompletion(true , nil)
+        }catch let error {
+            // Notify completion with error description
+            print(error.localizedDescription)
+            oncompletion(false , error.localizedDescription)
         }
     }
     

@@ -141,7 +141,6 @@ extension PingIdentityEncryptMessageVC {
         viewModel.encryptTextMessage(inputText: inputTextField.text ?? "", publicKey: publicKey){ [weak self] (success , error) in
             if success{
                 self?.showToast(message: StringConstants.GenericStrings.MessageEncrpted, font: .systemFont(ofSize: 12.0))
-                HapticTouch.addHapticTouch(style: .light)
                 self?.generateSecondRSAKeyPair()
             }else{
                 if let errorMessage = error{
@@ -175,9 +174,12 @@ extension PingIdentityEncryptMessageVC {
         viewModel.signedData(encryptedData: encryptedData, secondPrivateKey: secondPrivateKey){ [weak self] (success , error) in
             if success{
                 self?.showToast(message: StringConstants.GenericStrings.SignatureIsAdded, font: .systemFont(ofSize: 12.0))
-                HapticTouch.addHapticTouch(style: .light)
                 if let signature = self?.viewModel.payloadDataSource?.signature{
+                    
+                    // Payload created to send notification
                     self?.payLoad = [StringConstants.JSONKey.EncryptedString : encryptedData , StringConstants.JSONKey.Signature : signature]
+                    
+                    // Show toast and stop button animation
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
                         self?.showToast(message: StringConstants.GenericStrings.TimeerCreatedForFifteenSec, font: .systemFont(ofSize: 12.0))
                         self?.sendButton.stopAnimation()
