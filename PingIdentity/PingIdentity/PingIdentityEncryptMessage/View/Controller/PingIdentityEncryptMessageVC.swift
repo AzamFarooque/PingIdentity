@@ -37,6 +37,8 @@ class PingIdentityEncryptMessageVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.CustomColor.backgroundColor
+        
         // Requesting notification permission
         LocalNotificationManager.askForNotificationPermission()
         

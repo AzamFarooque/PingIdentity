@@ -37,6 +37,7 @@ class LocalNotificationManager{
         let content = UNMutableNotificationContent()
         content.title = StringConstants.Notification.TitleText
         content.body = StringConstants.Notification.BodyText
+        content.sound = UNNotificationSound.default
         content.userInfo = [StringConstants.JSONKey.Payload: payload]
         
         // Create notification trigger (15 second delay, non-repeating)

@@ -52,7 +52,7 @@ class PingIdentityDecryptMessageVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = UIColor.CustomColor.backgroundColor
         setupUI()
     }
     
