@@ -80,25 +80,24 @@ class PingIdentityEncryptMessageViewModel{
     /// - Parameters:
     ///   - encryptedData: The encrypted data used during key pair generation.
     ///   - oncompletion: The completion closure indicating the success or failure of the operation.
-    func generateSecondRSAKeyPair(encryptedData : Data , oncompletion : @escaping oncompletion){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
-            do {
-                // Generate second set of RSA key pair
-                let (secondPrivateKey, secondPublicKey) = try  RSAHandler.shared.generateRSAKeyPair()
-                
-                // Save the second public key to the keychain
-                try PingIdentityKeyChainHandler.shared.saveKeyToKeychain(key: secondPublicKey, identifier: StringConstants.KeyChainKey.secondPublicKey)
-                
-                // Update the data source with the second RSA key pair
-                self.secondRSAKeyDataSource = PingIdentitySecondRSAKeyModel(publicKey: secondPublicKey, privateKey: secondPrivateKey)
-                
-                // Notify completion with success
-                oncompletion(true , nil)
-            }catch let error {
-                // Notify completion with error description
-                oncompletion(false , error.localizedDescription)
-            }
+    func generateSecondRSAKeyPair(encryptedData : Data , oncompletion :  oncompletion){
+        do {
+            // Generate second set of RSA key pair
+            let (secondPrivateKey, secondPublicKey) = try  RSAHandler.shared.generateRSAKeyPair()
+            
+            // Save the second public key to the keychain
+            try PingIdentityKeyChainHandler.shared.saveKeyToKeychain(key: secondPublicKey, identifier: StringConstants.KeyChainKey.secondPublicKey)
+            
+            // Update the data source with the second RSA key pair
+            self.secondRSAKeyDataSource = PingIdentitySecondRSAKeyModel(publicKey: secondPublicKey, privateKey: secondPrivateKey)
+            
+            // Notify completion with success
+            oncompletion(true , nil)
+        }catch let error {
+            // Notify completion with error description
+            oncompletion(false , error.localizedDescription)
         }
+        
     }
     
     // MARK: - Sign Data

@@ -25,7 +25,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NBy-5E-plt">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NBy-5E-plt" customClass="PingIdentityTransitionButton" customModule="PingIdentity" customModuleProvider="target">
                                 <rect key="frame" x="121.66666666666669" y="279" width="150" height="35"/>
                                 <color key="backgroundColor" red="0.2470588235" green="0.78823529410000004" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -80,7 +80,7 @@
                         <outlet property="biometricEnableAndDisableSwitch" destination="EWs-jE-421" id="7zq-13-FXf"/>
                         <outlet property="biometricEnableAndDisabledLbl" destination="WL4-2C-ohs" id="RnR-KM-xFq"/>
                         <outlet property="inputTextField" destination="1ZA-K9-9fd" id="r6x-a7-Qp9"/>
-                        <outlet property="sendButton" destination="NBy-5E-plt" id="5AB-eB-qE9"/>
+                        <outlet property="sendButton" destination="NBy-5E-plt" id="TWS-lp-vU1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

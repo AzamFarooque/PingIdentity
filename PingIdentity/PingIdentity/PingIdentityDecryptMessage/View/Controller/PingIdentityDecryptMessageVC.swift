@@ -58,7 +58,7 @@ class PingIdentityDecryptMessageVC: UIViewController {
     
     // MARK: - Setup UI
     
-    func setupUI(){
+    private func setupUI(){
         // Set up the label for displaying decrypted message
         setUpDecryptMessageLabel()
         
@@ -68,7 +68,7 @@ class PingIdentityDecryptMessageVC: UIViewController {
     
     // MARK: - Remove observers to avoid memory leaks
     
-    func clearObserver(){
+    private func clearObserver(){
         NotificationCenter.default.removeObserver(self)
     }
 }
@@ -79,7 +79,7 @@ extension PingIdentityDecryptMessageVC {
     
     // MARK: - Decrypt Label Setup
     
-    func setUpDecryptMessageLabel(){
+    private func setUpDecryptMessageLabel(){
         decryptMessageLbl.textAlignment = .center
         decryptMessageLbl.numberOfLines = 0
         decryptMessageLbl.font = .boldSystemFont(ofSize: 15)
@@ -90,7 +90,7 @@ extension PingIdentityDecryptMessageVC {
     
     // MARK: - Decrypt Label Constraint Setup
     
-    func addConstraintsForDecryptLabel(){
+    private func addConstraintsForDecryptLabel(){
         
         // Center the label horizontally
         NSLayoutConstraint.activate([
@@ -112,7 +112,7 @@ extension PingIdentityDecryptMessageVC {
     
     // MARK: - Face ID Authorization
     
-    func authorise(){
+    private func authorise(){
         let context = LAContext()
         var error : NSError? = nil
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error){
@@ -137,7 +137,7 @@ extension PingIdentityDecryptMessageVC{
     
     // MARK: - Verify Signature
     
-    func verifySignature(){
+    private func verifySignature(){
         guard let payload = userInfo?[StringConstants.JSONKey.Payload] as? [String : Any] else {return}
         viewModel.verifySignature(payload: payload){ [weak self] (success , error) in
             if success{
@@ -153,7 +153,7 @@ extension PingIdentityDecryptMessageVC{
     
     // MARK: - Decrypt Message
     
-    func decryptMessage(){
+    private func decryptMessage(){
         if let payload = userInfo?[StringConstants.JSONKey.Payload] as? [String : Any] , let encrpt = payload[StringConstants.JSONKey.EncryptedString] as? Data {
             viewModel.decryptMessage(encrpt: encrpt) { [weak self] (success , error) in
                 if success{

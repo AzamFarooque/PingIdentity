@@ -15,7 +15,7 @@ class PingIdentityEncryptMessageVC: UIViewController {
     // MARK: IBOutlets
     
     // Send button reference
-    @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var sendButton: PingIdentityTransitionButton!
     //  Biometric switch to enabled or disabled
     @IBOutlet weak var biometricEnableAndDisableSwitch: UISwitch!
     // InputTextField IBOutlet
@@ -26,11 +26,11 @@ class PingIdentityEncryptMessageVC: UIViewController {
     // MARK: Properties
     
     // Viewmodel
-    let viewModel = PingIdentityEncryptMessageViewModel()
+    private let viewModel = PingIdentityEncryptMessageViewModel()
     // Payload
-    var payLoad : [String : Any]?
+    private var payLoad : [String : Any]?
     // Flag to check biometric enabled or disabled
-    var isBiometricRequired : Bool = false
+    private var isBiometricRequired : Bool = false
     
     
     // MARK: - View Lifecycle
@@ -95,6 +95,9 @@ class PingIdentityEncryptMessageVC: UIViewController {
             return
         }
         
+        // Button progress
+        sendButton.startAnimation()
+        
         // Hiding the keyboard
         self.inputTextField.resignFirstResponder()
         
@@ -104,7 +107,7 @@ class PingIdentityEncryptMessageVC: UIViewController {
     
     // MARK: - Remove Observers
     
-    func clearObserver(){
+    private func clearObserver(){
         NotificationCenter.default.removeObserver(self)
     }
 }
@@ -155,8 +158,6 @@ extension PingIdentityEncryptMessageVC {
         guard let encryptedData = viewModel.payloadDataSource?.encryptedData else {return}
         viewModel.generateSecondRSAKeyPair(encryptedData: encryptedData) { [weak self] (success , error) in
             if success{
-                self?.showToast(message: StringConstants.GenericStrings.SecondKeyCreated, font: .systemFont(ofSize: 12.0))
-                HapticTouch.addHapticTouch(style: .light)
                 self?.signedData()
             }else{
                 if let errorMessage = error{
@@ -177,6 +178,10 @@ extension PingIdentityEncryptMessageVC {
                 HapticTouch.addHapticTouch(style: .light)
                 if let signature = self?.viewModel.payloadDataSource?.signature{
                     self?.payLoad = [StringConstants.JSONKey.EncryptedString : encryptedData , StringConstants.JSONKey.Signature : signature]
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
+                        self?.showToast(message: StringConstants.GenericStrings.TimeerCreatedForFifteenSec, font: .systemFont(ofSize: 12.0))
+                        self?.sendButton.stopAnimation()
+                    }
                 }
             }else{
                 if let errorMessage = error{
@@ -249,14 +254,12 @@ extension PingIdentityEncryptMessageVC {
     private func scheduleBackgroundTask() {
         // Ensure that there is a payload to include in the notification
         guard let payload = payLoad else {return}
-        let delayInSeconds = 0.0
-        DispatchQueue.main.asyncAfter(deadline: .now() + delayInSeconds) {
-            // Send a local push notification with the provided payload
-            LocalNotificationManager.sendLocalPushNotification(payload: payload)
-            
-            // Clear the payload after sending the notification
-            self.payLoad = nil
-        }
+        
+        // Send a local push notification with the provided payload
+        LocalNotificationManager.sendLocalPushNotification(payload: payload)
+        
+        // Clear the payload after sending the notification
+        self.payLoad = nil
     }
 }
 
