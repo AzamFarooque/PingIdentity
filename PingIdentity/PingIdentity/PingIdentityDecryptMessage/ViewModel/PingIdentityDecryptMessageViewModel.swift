@@ -24,15 +24,15 @@ class PingIdentityDecryptMessageViewModel{
     ///   - payload: The payload containing the encrypted message and its signature.
     ///   - oncompletion: A completion handler indicating the success or failure of the verification.
     func verifySignature(payload : [String : Any] , oncompletion : @escaping oncompletion){
-            let encryptedString = payload[StringConstants.JSONKey.EncryptedString]
-            let signature = payload[StringConstants.JSONKey.Signature]
-            if let encrpt = encryptedString as? Data , let sig = signature as? Data {
-                DispatchQueue.global().async {
+        let encryptedString = payload[StringConstants.JSONKey.EncryptedString]
+        let signature = payload[StringConstants.JSONKey.Signature]
+        if let encrpt = encryptedString as? Data , let sig = signature as? Data {
+            DispatchQueue.global().async {
                 do{
                     // Verify the signature using the stored public key
                     let secondPublicKey = try PingIdentityKeyChainHandler.shared.getKeyFromKeychain(identifier: StringConstants.KeyChainKey.secondPublicKey)
+                    let isSignatureValid = RSAHandler.shared.verifySignature(encrpt , signature: sig , publicKey: secondPublicKey)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0){
-                        let isSignatureValid = RSAHandler.shared.verifySignature(encrpt , signature: sig , publicKey: secondPublicKey)
                         if isSignatureValid{
                             oncompletion(true , nil)
                         }else{
