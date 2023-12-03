@@ -47,7 +47,7 @@
                                     <constraint firstAttribute="width" constant="47" id="Hte-eb-Bej"/>
                                 </constraints>
                                 <connections>
-                                    <action selector="didTapToEnableAndDisableFaceId:" destination="BYZ-38-t0r" eventType="valueChanged" id="v8d-ZA-pjr"/>
+                                    <action selector="didTapToEnableAndDisableBiometric:" destination="BYZ-38-t0r" eventType="valueChanged" id="KzD-JL-ki2"/>
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Biometric Disable" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WL4-2C-ohs">

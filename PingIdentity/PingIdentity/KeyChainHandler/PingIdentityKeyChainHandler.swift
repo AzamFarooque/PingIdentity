@@ -107,12 +107,3 @@ final class PingIdentityKeyChainHandler {
     }
     
 }
-
-// MARK: - KeychainError Enum
-
-/// Enum to represent Keychain-related errors
-enum KeychainError: Error {
-    case keySaveError(status: OSStatus)
-    case keyLoadError(status: OSStatus)
-    case keyDeleteError(status: OSStatus)
-}

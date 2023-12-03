@@ -69,7 +69,7 @@ class PingIdentityEncryptMessageVC: UIViewController {
     
     // MARK: - Biometric Switch Enable or Disable Action
     
-    @IBAction func didTapToEnableAndDisableFaceId(_ sender: UISwitch) {
+    @IBAction func didTapToEnableAndDisableBiometric(_ sender: UISwitch) {
         // Updating user defaults based on switch state
         sender.isOn ? UserDefaults.standard.set(true , forKey: StringConstants.UserDefaultKey.SwitchEnableAndDisable) : UserDefaults.standard.set(false , forKey: StringConstants.UserDefaultKey.SwitchEnableAndDisable)
         
@@ -256,7 +256,7 @@ extension PingIdentityEncryptMessageVC {
         guard let payload = payLoad else {return}
         
         // Send a local push notification with the provided payload
-        LocalNotificationManager.sendLocalPushNotification(payload: payload)
+        LocalNotificationManager.sendLocalPushNotification(payload: payload , delay: 15)
         
         // Clear the payload after sending the notification
         self.payLoad = nil

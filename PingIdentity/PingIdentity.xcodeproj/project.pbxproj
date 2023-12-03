@@ -10,6 +10,7 @@
 		864647122B1C5E7500C0ECD7 /* RSAError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864647112B1C5E7500C0ECD7 /* RSAError.swift */; };
 		864647142B1C7D9000C0ECD7 /* PingIdentityTransitionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864647132B1C7D9000C0ECD7 /* PingIdentityTransitionButton.swift */; };
 		864647182B1C7E1000C0ECD7 /* PingIdentityButtonDotsAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864647172B1C7E1000C0ECD7 /* PingIdentityButtonDotsAnimationView.swift */; };
+		8646471A2B1C852A00C0ECD7 /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864647192B1C852A00C0ECD7 /* KeychainError.swift */; };
 		8671C79F2B1AF823004A3FA9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8671C79E2B1AF823004A3FA9 /* Extensions.swift */; };
 		8671C7A32B1AFF00004A3FA9 /* RSAHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8671C7A22B1AFF00004A3FA9 /* RSAHandler.swift */; };
 		8671C7A62B1B06D0004A3FA9 /* PingIdentityKeyChainHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8671C7A52B1B06D0004A3FA9 /* PingIdentityKeyChainHandler.swift */; };
@@ -52,6 +53,7 @@
 		864647112B1C5E7500C0ECD7 /* RSAError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSAError.swift; sourceTree = "<group>"; };
 		864647132B1C7D9000C0ECD7 /* PingIdentityTransitionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingIdentityTransitionButton.swift; sourceTree = "<group>"; };
 		864647172B1C7E1000C0ECD7 /* PingIdentityButtonDotsAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingIdentityButtonDotsAnimationView.swift; sourceTree = "<group>"; };
+		864647192B1C852A00C0ECD7 /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
 		8671C79E2B1AF823004A3FA9 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		8671C7A22B1AFF00004A3FA9 /* RSAHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSAHandler.swift; sourceTree = "<group>"; };
 		8671C7A52B1B06D0004A3FA9 /* PingIdentityKeyChainHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingIdentityKeyChainHandler.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				8671C7A52B1B06D0004A3FA9 /* PingIdentityKeyChainHandler.swift */,
+				864647192B1C852A00C0ECD7 /* KeychainError.swift */,
 			);
 			path = KeyChainHandler;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 				8671C7A62B1B06D0004A3FA9 /* PingIdentityKeyChainHandler.swift in Sources */,
 				86EF6AD32B1B924300826C6A /* PingIdentityDecryptMessage.swift in Sources */,
 				864647122B1C5E7500C0ECD7 /* RSAError.swift in Sources */,
+				8646471A2B1C852A00C0ECD7 /* KeychainError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

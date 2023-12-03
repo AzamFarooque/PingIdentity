@@ -32,15 +32,15 @@ class LocalNotificationManager{
     /// - Parameter payload: The payload data to be included in the notification.
     ///
     /// - Note: This method creates a local notification with the specified payload and schedules it for delivery.
-    static func sendLocalPushNotification(payload: [String : Any]) {
+    static func sendLocalPushNotification(payload: [String : Any] , delay : TimeInterval) {
         // Create notification content
         let content = UNMutableNotificationContent()
         content.title = StringConstants.Notification.TitleText
         content.body = StringConstants.Notification.BodyText
         content.userInfo = [StringConstants.JSONKey.Payload: payload]
         
-        // Create notification trigger (one second delay, non-repeating)
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        // Create notification trigger (15 second delay, non-repeating)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: delay, repeats: false)
         
         // Generate a unique identifier for the notification request
         let uuid = UUID().uuidString
