@@ -8,11 +8,15 @@
 import Foundation
 import UIKit
 
-// Textfield extension to add and extend new functionality
+// MARK: - UITextField Extension
+
+// Extension to UITextField to add and extend new functionality
 extension UITextField {
     
-    // MARK: - Method to provide left padding
+    // MARK: - Set Left Padding
     
+    /// Sets left padding to the UITextField.
+    /// - Parameter amount: The amount of padding to be set.
     func setLeftPaddingPoints(_ amount:CGFloat){
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
         self.leftView = paddingView
@@ -21,29 +25,47 @@ extension UITextField {
     
 }
 
+// MARK: - UIViewController Extension
+
+// Extension to UIViewController for showing toast messages
 extension UIViewController {
+    
+    // MARK: - Show Toast Message
+    
+    /// Displays a toast message on the view controller.
+    /// - Parameters:
+    ///   - message: The message to be displayed.
+    ///   - font: The font of the message.
+    func showToast(message : String, font: UIFont) {
+        
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height/2, width: 150, height: 35))
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        toastLabel.textColor = UIColor.white
+        toastLabel.font = font
+        toastLabel.textAlignment = .center;
+        toastLabel.text = message
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10;
+        toastLabel.clipsToBounds  =  true
+        self.view.addSubview(toastLabel)
+        UIView.animate(withDuration: 2.0, delay: 0.1, options: .curveEaseOut, animations: {
+            toastLabel.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
+    }
+    
+}
 
-func showToast(message : String, font: UIFont) {
+// MARK: - HapticTouch Class
 
-    let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height/2, width: 150, height: 35))
-    toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-    toastLabel.textColor = UIColor.white
-    toastLabel.font = font
-    toastLabel.textAlignment = .center;
-    toastLabel.text = message
-    toastLabel.alpha = 1.0
-    toastLabel.layer.cornerRadius = 10;
-    toastLabel.clipsToBounds  =  true
-    self.view.addSubview(toastLabel)
-    UIView.animate(withDuration: 2.0, delay: 0.1, options: .curveEaseOut, animations: {
-         toastLabel.alpha = 0.0
-    }, completion: {(isCompleted) in
-        toastLabel.removeFromSuperview()
-    })
-} }
-
-
+// Class to handle haptic touch feedback
 public class HapticTouch{
+    
+    // MARK: - Add Haptic Touch
+    
+    /// Adds haptic touch feedback with the specified style.
+    /// - Parameter style: The style of haptic feedback.
     static func addHapticTouch(style: UIImpactFeedbackGenerator.FeedbackStyle){
         let generator = UIImpactFeedbackGenerator(style: style)
         generator.impactOccurred()

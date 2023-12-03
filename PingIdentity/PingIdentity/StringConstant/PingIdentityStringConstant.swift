@@ -10,6 +10,8 @@ import Foundation
 
 struct StringConstants {
     
+    // MARK: - Generic Strings
+    
     struct GenericStrings {
         static let PleaseEnterText = "Please enter Text"
         static let KeyCreated = "Key Created"
@@ -26,10 +28,14 @@ struct StringConstants {
         
     }
     
+    // MARK: - Local Notification Title and Body String
+    
     struct Notification {
         static let TitleText = "Encrypted Message Received"
         static let BodyText = "Tap to decrypt and view the message"
     }
+    
+    // MARK: - Notification Keys
     
     struct PrefKey {
         static let AppWillTerminate = "AppWillTerminate"
@@ -37,14 +43,20 @@ struct StringConstants {
         static let NotificationTapPushMoveDecryptVC = "NotificationTapPushMoveDecryptVC"
     }
     
+    // MARK: - UserDefaults Keys
+    
     struct UserDefaultKey {
         static let SwitchEnableAndDisable = "switchEnableAndDisable"
     }
+    
+    // MARK: - Keychain Keys
     
     struct KeyChainKey {
         static let Privatekey = "com.example.privatekey"
         static let secondPublicKey = "com.example.secondPublicKey"
     }
+    
+    // MARK: - JSON Keys
     
     struct JSONKey {
         static let EncryptedString = "encryptedString"
@@ -52,5 +64,4 @@ struct StringConstants {
         static let Payload = "payload"
         
     }
-    
 }

@@ -7,13 +7,22 @@
 
 import Foundation
 
-import Foundation
+// MARK: - PingIdentityKeyChainHandler Class
 
 final class PingIdentityKeyChainHandler {
     
+    // Singleton instance of PingIdentityKeyChainHandler
     static let shared = PingIdentityKeyChainHandler()
-    private init(){}
-    // Function to store a SecKey in the Keychain
+    private init(){} // Private initializer to enforce singleton pattern
+    
+    // MARK: - Save SecKey to Keychain
+    
+    /// Saves a SecKey to the Keychain with a specified identifier.
+    ///
+    /// - Parameters:
+    ///   - key: The SecKey to be saved.
+    ///   - identifier: The unique identifier for the Keychain entry.
+    /// - Throws: A KeychainError if the key saving operation fails.
     func saveKeyToKeychain(key: SecKey, identifier: String) throws {
         let query: [String: Any] = [
             kSecClass as String: kSecClassKey,
@@ -37,9 +46,15 @@ final class PingIdentityKeyChainHandler {
         }
     }
     
-    // Function to retrieve a SecKey from the Keychain
-    // Function to retrieve a SecKey from the Keychain
+    // MARK: - Retrieve SecKey from Keychain
+    
+    /// Retrieves a SecKey from the Keychain using a specified identifier.
+    ///
+    /// - Parameter identifier: The unique identifier for the Keychain entry.
+    /// - Returns: The retrieved SecKey.
+    /// - Throws: A KeychainError if the key retrieval operation fails.
     func getKeyFromKeychain(identifier: String) throws -> SecKey {
+        // Keychain query parameters
         let query: [String: Any] = [
             kSecClass as String: kSecClassKey,
             kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
@@ -58,7 +73,14 @@ final class PingIdentityKeyChainHandler {
         return keyRef as! SecKey
     }
     
+    // MARK: - Remove SecKey from Keychain
+    
+    /// Removes a SecKey from the Keychain using a specified identifier.
+    ///
+    /// - Parameter identifier: The unique identifier for the Keychain entry.
+    /// - Throws: A KeychainError if the key removal operation fails.
     func removeKeyFromKeychain(identifier: String) throws {
+        // Keychain query parameters
         let query: [String: Any] = [
             kSecClass as String: kSecClassKey,
             kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
@@ -72,8 +94,9 @@ final class PingIdentityKeyChainHandler {
         }
     }
     
-    // MARK: Deleting Saved Priavte and Public key which saved in key chain
+    // MARK: - Remove All Keys
     
+    /// Removes all saved private and public keys from the Keychain.
     func removeAllKey(){
         do {
             try PingIdentityKeyChainHandler.shared.removeKeyFromKeychain(identifier: StringConstants.KeyChainKey.Privatekey)
@@ -85,7 +108,9 @@ final class PingIdentityKeyChainHandler {
     
 }
 
-// Enum to represent Keychain-related errors
+// MARK: - KeychainError Enum
+
+/// Enum to represent Keychain-related errors
 enum KeychainError: Error {
     case keySaveError(status: OSStatus)
     case keyLoadError(status: OSStatus)

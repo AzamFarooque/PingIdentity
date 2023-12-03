@@ -45,7 +45,7 @@ class PingIdentityEncryptMessageVC: UIViewController {
         
         // Setting up inputTextField delegate
         inputTextField.delegate = self
-        inputTextField.setLeftPaddingPoints(16)
+        inputTextField.setLeftPaddingPoints(8)
         
         // Configuring navigation bar
         navigationController?.navigationBar.isTranslucent = true
@@ -137,6 +137,7 @@ extension PingIdentityEncryptMessageVC {
         viewModel.encryptTextMessage(inputText: inputTextField.text ?? "", publicKey: publicKey){ [weak self] (success , error) in
             if success{
                 self?.showToast(message: StringConstants.GenericStrings.MessageEncrpted, font: .systemFont(ofSize: 12.0))
+                HapticTouch.addHapticTouch(style: .light)
                 self?.generateSecondRSAKeyPair()
             }else{
                 
@@ -153,6 +154,7 @@ extension PingIdentityEncryptMessageVC {
         viewModel.generateSecondRSAKeyPair(encryptedData: encryptedData) { [weak self] (success , error) in
             if success{
                 self?.showToast(message: StringConstants.GenericStrings.SecondKeyCreated, font: .systemFont(ofSize: 12.0))
+                HapticTouch.addHapticTouch(style: .light)
                 self?.signedData()
             }else{
                 
@@ -168,6 +170,7 @@ extension PingIdentityEncryptMessageVC {
         viewModel.signedData(encryptedData: encryptedData, secondPrivateKey: secondPrivateKey){ [weak self] (success , error) in
             if success{
                 self?.showToast(message: StringConstants.GenericStrings.SignatureIsAdded, font: .systemFont(ofSize: 12.0))
+                HapticTouch.addHapticTouch(style: .light)
                 if let signature = self?.viewModel.payloadDataSource?.signature{
                     self?.payLoad = [StringConstants.JSONKey.EncryptedString : encryptedData , StringConstants.JSONKey.Signature : signature]
                 }
