@@ -31,7 +31,7 @@ final class RSAHandler{
         
         guard let privateKey = SecKeyCreateRandomKey(attributes as CFDictionary, &error),
               let publicKey = SecKeyCopyPublicKey(privateKey) else {
-            throw error!.takeRetainedValue() as Error
+            throw RSAError.keyGenerationFailed(error: error?.takeRetainedValue())
         }
         
         return (privateKey, publicKey)
@@ -50,7 +50,7 @@ final class RSAHandler{
         var error: Unmanaged<CFError>?
         
         guard let encryptedData = SecKeyCreateEncryptedData(publicKey, .rsaEncryptionPKCS1, plainText as CFData, &error) as Data? else {
-            throw error!.takeRetainedValue() as Error
+            throw RSAError.encryptionFailed(error: error?.takeRetainedValue())
         }
         
         return encryptedData
@@ -69,7 +69,7 @@ final class RSAHandler{
         var error: Unmanaged<CFError>?
         
         guard let decryptedData = SecKeyCreateDecryptedData(privateKey, .rsaEncryptionPKCS1, encryptedData as CFData, &error) as Data? else {
-            throw error!.takeRetainedValue() as Error
+            throw RSAError.decryptionFailed(error: error?.takeRetainedValue())
         }
         
         return decryptedData
@@ -88,7 +88,7 @@ final class RSAHandler{
         var error: Unmanaged<CFError>?
         
         guard let signature = SecKeyCreateSignature(privateKey, .rsaSignatureMessagePKCS1v15SHA256, data as CFData, &error) as Data? else {
-            throw error!.takeRetainedValue() as Error
+            throw RSAError.signatureCreationFailed(error: error?.takeRetainedValue())
         }
         
         return signature
@@ -116,3 +116,4 @@ final class RSAHandler{
         )
     }
 }
+

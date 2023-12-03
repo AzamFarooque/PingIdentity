@@ -41,6 +41,7 @@ class PingIdentityEncryptMessageViewModel{
                 oncompletion(true , nil)
             }catch let error {
                 // Notify completion with error description
+                print(error.localizedDescription)
                 oncompletion(false , error.localizedDescription)
             }
         }

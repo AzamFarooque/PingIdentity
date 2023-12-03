@@ -123,7 +123,9 @@ extension PingIdentityEncryptMessageVC {
                 self?.showToast(message: StringConstants.GenericStrings.KeyCreated, font: .systemFont(ofSize: 12.0))
                 self?.encryptTextMessage()
             }else{
-                
+                if let errorMessage = error{
+                    self?.showToast(message: errorMessage, font: .systemFont(ofSize: 12.0))
+                }
             }
             return
         }

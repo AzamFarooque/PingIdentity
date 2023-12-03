@@ -40,7 +40,7 @@
                                     <action selector="didTapToSend:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DJQ-5C-TFD"/>
                                 </connections>
                             </button>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EWs-jE-421">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="EWs-jE-421">
                                 <rect key="frame" x="330" y="119" width="49" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="5ym-PL-uxp"/>
@@ -50,7 +50,7 @@
                                     <action selector="didTapToEnableAndDisableFaceId:" destination="BYZ-38-t0r" eventType="valueChanged" id="v8d-ZA-pjr"/>
                                 </connections>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Face id enabled" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WL4-2C-ohs">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Biometric Disable" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WL4-2C-ohs">
                                 <rect key="frame" x="16" y="124" width="298" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="bSE-bY-RfN"/>

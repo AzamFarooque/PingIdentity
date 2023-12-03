@@ -64,4 +64,13 @@ struct StringConstants {
         static let Payload = "payload"
         
     }
+    
+    // MARK: - RSA Error String
+    
+    struct RSAErrorString{
+        static let KeyPairGenerationFailedText = "Couldn't generate key pair"
+        static let EncryptionFailed = "Encryption failed"
+        static let DecryptionFailed = "Decryption failed"
+        static let SignatureCreationFailed  = "Sign-In failed"
+    }
 }
