@@ -14,22 +14,22 @@ class PingIdentityEncryptMessageVC: UIViewController {
     
     // MARK: IBOutlets
     
-    // Send button reference
+    // Reference to the send button with a custom transition
     @IBOutlet weak var sendButton: PingIdentityTransitionButton!
-    //  Biometric switch to enabled or disabled
+    // Switch to enable or disable biometric functionality
     @IBOutlet weak var biometricEnableAndDisableSwitch: UISwitch!
-    // InputTextField IBOutlet
+    // Input text field for user input
     @IBOutlet weak var inputTextField: UITextField!
-    // biometricEnableAndDisabledLbl reference
+    // Label indicating whether biometric functionality is enabled or disabled
     @IBOutlet weak var biometricEnableAndDisabledLbl: UILabel!
     
     // MARK: Properties
     
-    // Viewmodel
+    // VieWmodel
     private let viewModel = PingIdentityEncryptMessageViewModel()
     // Payload
     private var payLoad : [String : Any]?
-    // Flag to check biometric enabled or disabled
+    // Flag indicating whether biometric functionality is enabled or disabled
     private var isBiometricEnabled : Bool = false
     
     
@@ -199,7 +199,7 @@ extension PingIdentityEncryptMessageVC {
 extension PingIdentityEncryptMessageVC {
     
     /// Updates the UI components related to biometric settings based on user preferences.
-    func updateBiometricUIBasedOnUserPreferences(){
+    private func updateBiometricUIBasedOnUserPreferences(){
         // Retrieve the biometric enable/disable status from UserDefaults
         isBiometricEnabled = UserDefaults.standard.bool(forKey: StringConstants.UserDefaultKey.SwitchEnableAndDisable)
         
@@ -252,7 +252,7 @@ extension PingIdentityEncryptMessageVC {
     // MARK: - Application Entering Background
     
     /// This method is triggered when the app moves to the background.
-    @objc func appDidEnterBackground() {
+    @objc private func appDidEnterBackground() {
         
         // Schedule a background task to send a local notification
         scheduleBackgroundTask()
@@ -261,7 +261,7 @@ extension PingIdentityEncryptMessageVC {
     // MARK: - Application Will Terminate
     
     /// This method is triggered when the app is terminated.
-    @objc func appWillTerminate() {
+    @objc private func appWillTerminate() {
         
         // Schedule a background task to send a local notification
         scheduleBackgroundTask()
@@ -292,14 +292,14 @@ extension PingIdentityEncryptMessageVC {
     ///
     /// - Parameters:
     ///   - notification: The notification containing user information.
-    @objc func pushToDecryptMessageVC(notification:Notification) {
+    @objc private func pushToDecryptMessageVC(notification:Notification) {
         // Check if the notification contains user information
         if let userInfo = notification.userInfo as? [String : Any]{
             // Create an instance of PingIdentityDecryptMessageVC with user information and biometric requirement status
-            let vc = PingIdentityDecryptMessageVC(userInfo:  userInfo , isBiometricEnabled: isBiometricEnabled)
+            let viewController = PingIdentityDecryptMessageVC(userInfo:  userInfo , isBiometricEnabled: isBiometricEnabled)
             
             // Push the second view controller onto the navigation stack
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.navigationController?.pushViewController(viewController, animated: true)
         }
     }
 }

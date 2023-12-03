@@ -16,8 +16,13 @@ class PingIdentityEncryptMessageViewModel{
     
     // MARK: - Data Sources
     
+    // Data source for the initial RSA key pair
     var rsaKeyDataSource : PingIdentityRSAKeyModel?
+    
+    // Data source for the encrypted payload
     var payloadDataSource : PingIdentityPayLoadModel?
+    
+    // Data source for the second set of RSA keys
     var secondRSAKeyDataSource : PingIdentitySecondRSAKeyModel?
     
     // MARK: - Generate RSA Key Pair
@@ -25,23 +30,28 @@ class PingIdentityEncryptMessageViewModel{
     /// Generates an RSA key pair and saves the private key to the keychain.
     ///
     /// - Parameter oncompletion: The completion closure indicating the success or failure of the operation.
-    func generateRSAKeyPair(oncompletion : oncompletion){
-        do {
-            // Generate RSA key pair
-            let (privateKey, publicKey) = try  RSAHandler.shared.generateRSAKeyPair()
-            
-            // Save private key to the keychain
-            try PingIdentityKeyChainHandler.shared.saveKeyToKeychain(key: privateKey, identifier: StringConstants.KeyChainKey.Privatekey)
-            
-            // Update the data source with the RSA key pair
-            self.rsaKeyDataSource = PingIdentityRSAKeyModel(publicKey: publicKey, privateKey: privateKey)
-            
-            // Notify completion with success
-            oncompletion(true , nil)
-        }catch let error {
-            // Notify completion with error description
-            print(error.localizedDescription)
-            oncompletion(false , error.localizedDescription)
+    func generateRSAKeyPair(oncompletion : @escaping oncompletion){
+        DispatchQueue.global().async {
+            do {
+                // Generate RSA key pair
+                let (privateKey, publicKey) = try  RSAHandler.shared.generateRSAKeyPair()
+                
+                // Save private key to the keychain
+                try PingIdentityKeyChainHandler.shared.saveKeyToKeychain(key: privateKey, identifier: StringConstants.KeyChainKey.Privatekey)
+                
+                DispatchQueue.main.async {
+                    // Update the data source with the RSA key pair
+                    self.rsaKeyDataSource = PingIdentityRSAKeyModel(publicKey: publicKey, privateKey: privateKey)
+                    
+                    // Notify completion with success
+                    oncompletion(true , nil)
+                }
+            }catch let error {
+                // Notify completion with error description
+                DispatchQueue.main.async {
+                    oncompletion(false , error.localizedDescription)
+                }
+            }
         }
     }
     
@@ -54,19 +64,23 @@ class PingIdentityEncryptMessageViewModel{
     ///   - publicKey: The RSA public key used for encryption.
     ///   - oncompletion: The completion closure indicating the success or failure of the operation.
     func encryptTextMessage(inputText : String ,publicKey : SecKey , oncompletion : @escaping oncompletion){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
+        DispatchQueue.global().async {
             do {
                 // Encrypt the input text using the RSA public key
                 let encryptedData = try  RSAHandler.shared.encryptRSA(Data((inputText).utf8), publicKey: publicKey)
                 
-                // Update the data source with the encrypted data
-                self.payloadDataSource = PingIdentityPayLoadModel(encryptedData: encryptedData)
-                
-                // Notify completion with success
-                oncompletion(true , nil)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
+                    // Update the data source with the encrypted data
+                    self.payloadDataSource = PingIdentityPayLoadModel(encryptedData: encryptedData)
+                    
+                    // Notify completion with success
+                    oncompletion(true , nil)
+                }
             }catch let error {
-                // Notify completion with error description
-                oncompletion(false , error.localizedDescription)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
+                    // Notify completion with error description
+                    oncompletion(false , error.localizedDescription)
+                }
             }
         }
     }
@@ -78,24 +92,28 @@ class PingIdentityEncryptMessageViewModel{
     /// - Parameters:
     ///   - encryptedData: The encrypted data used during key pair generation.
     ///   - oncompletion: The completion closure indicating the success or failure of the operation.
-    func generateSecondRSAKeyPair(encryptedData : Data , oncompletion :  oncompletion){
-        do {
-            // Generate second set of RSA key pair
-            let (secondPrivateKey, secondPublicKey) = try  RSAHandler.shared.generateRSAKeyPair()
-            
-            // Save the second public key to the keychain
-            try PingIdentityKeyChainHandler.shared.saveKeyToKeychain(key: secondPublicKey, identifier: StringConstants.KeyChainKey.secondPublicKey)
-            
-            // Update the data source with the second RSA key pair
-            self.secondRSAKeyDataSource = PingIdentitySecondRSAKeyModel(publicKey: secondPublicKey, privateKey: secondPrivateKey)
-            
-            // Notify completion with success
-            oncompletion(true , nil)
-        }catch let error {
-            // Notify completion with error description
-            oncompletion(false , error.localizedDescription)
+    func generateSecondRSAKeyPair(encryptedData : Data , oncompletion : @escaping oncompletion){
+        DispatchQueue.global().async {
+            do {
+                // Generate second set of RSA key pair
+                let (secondPrivateKey, secondPublicKey) = try  RSAHandler.shared.generateRSAKeyPair()
+                
+                // Save the second public key to the keychain
+                try PingIdentityKeyChainHandler.shared.saveKeyToKeychain(key: secondPublicKey, identifier: StringConstants.KeyChainKey.secondPublicKey)
+                DispatchQueue.main.async {
+                    // Update the data source with the second RSA key pair
+                    self.secondRSAKeyDataSource = PingIdentitySecondRSAKeyModel(publicKey: secondPublicKey, privateKey: secondPrivateKey)
+                    
+                    // Notify completion with success
+                    oncompletion(true , nil)
+                }
+            }catch let error {
+                DispatchQueue.main.async {
+                    // Notify completion with error description
+                    oncompletion(false , error.localizedDescription)
+                }
+            }
         }
-        
     }
     
     // MARK: - Sign Data
@@ -107,19 +125,23 @@ class PingIdentityEncryptMessageViewModel{
     ///   - secondPrivateKey: The second RSA private key used for signing.
     ///   - oncompletion: The completion closure indicating the success or failure of the operation.
     func signedData(encryptedData : Data , secondPrivateKey : SecKey , oncompletion : @escaping oncompletion){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
+        DispatchQueue.global().async {
             do {
                 // Sign the encrypted data using the second RSA private key
                 let signature = try  RSAHandler.shared.signData(encryptedData, privateKey: secondPrivateKey)
                 
-                // Update the data source with the signature
-                self.payloadDataSource = PingIdentityPayLoadModel(signature: signature)
-                
-                // Notify completion with success
-                oncompletion(true , nil)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
+                    // Update the data source with the signature
+                    self.payloadDataSource = PingIdentityPayLoadModel(signature: signature)
+                    
+                    // Notify completion with success
+                    oncompletion(true , nil)
+                }
             }catch let error {
-                // Notify completion with error description
-                oncompletion(false , error.localizedDescription)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
+                    // Notify completion with error description
+                    oncompletion(false , error.localizedDescription)
+                }
             }
         }
     }

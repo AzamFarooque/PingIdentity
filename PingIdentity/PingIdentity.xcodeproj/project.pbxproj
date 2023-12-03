@@ -26,6 +26,7 @@
 		86D902B12B183CBA00D3C793 /* PingIdentityUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D902B02B183CBA00D3C793 /* PingIdentityUITests.swift */; };
 		86D902B32B183CBA00D3C793 /* PingIdentityUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D902B22B183CBA00D3C793 /* PingIdentityUITestsLaunchTests.swift */; };
 		86E482F52B1CBA1200FC9F71 /* UIColor+CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E482F42B1CBA1200FC9F71 /* UIColor+CustomColors.swift */; };
+		86E482F72B1CD4A600FC9F71 /* HapticTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E482F62B1CD4A600FC9F71 /* HapticTouch.swift */; };
 		86EF6ACA2B1B74AB00826C6A /* PingIdentityEncryptMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF6AC92B1B74AB00826C6A /* PingIdentityEncryptMessageViewModel.swift */; };
 		86EF6ACC2B1B767700826C6A /* PingIdentityRSAKeyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF6ACB2B1B767700826C6A /* PingIdentityRSAKeyModel.swift */; };
 		86EF6AD12B1B908700826C6A /* PingIdentityDecryptMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF6AD02B1B908700826C6A /* PingIdentityDecryptMessageViewModel.swift */; };
@@ -76,6 +77,7 @@
 		86D902C22B1845D400D3C793 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		86D902E82B18CDD800D3C793 /* CryptoKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoKit.framework; path = System/Library/Frameworks/CryptoKit.framework; sourceTree = SDKROOT; };
 		86E482F42B1CBA1200FC9F71 /* UIColor+CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColors.swift"; sourceTree = "<group>"; };
+		86E482F62B1CD4A600FC9F71 /* HapticTouch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticTouch.swift; sourceTree = "<group>"; };
 		86EF6AC92B1B74AB00826C6A /* PingIdentityEncryptMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingIdentityEncryptMessageViewModel.swift; sourceTree = "<group>"; };
 		86EF6ACB2B1B767700826C6A /* PingIdentityRSAKeyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingIdentityRSAKeyModel.swift; sourceTree = "<group>"; };
 		86EF6AD02B1B908700826C6A /* PingIdentityDecryptMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingIdentityDecryptMessageViewModel.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 		864647152B1C7D9700C0ECD7 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				86E482F82B1CD7DC00FC9F71 /* Haptic */,
 				864647162B1C7D9E00C0ECD7 /* Button */,
 			);
 			path = Custom;
@@ -268,6 +271,14 @@
 				86D902C22B1845D400D3C793 /* Security.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		86E482F82B1CD7DC00FC9F71 /* Haptic */ = {
+			isa = PBXGroup;
+			children = (
+				86E482F62B1CD4A600FC9F71 /* HapticTouch.swift */,
+			);
+			path = Haptic;
 			sourceTree = "<group>";
 		};
 		86EF6AC62B1B73BE00826C6A /* View */ = {
@@ -469,6 +480,7 @@
 			files = (
 				8671C7A92B1B312B004A3FA9 /* PingIdentityStringConstant.swift in Sources */,
 				864647142B1C7D9000C0ECD7 /* PingIdentityTransitionButton.swift in Sources */,
+				86E482F72B1CD4A600FC9F71 /* HapticTouch.swift in Sources */,
 				8671C79F2B1AF823004A3FA9 /* Extensions.swift in Sources */,
 				86E482F52B1CBA1200FC9F71 /* UIColor+CustomColors.swift in Sources */,
 				864647182B1C7E1000C0ECD7 /* PingIdentityButtonDotsAnimationView.swift in Sources */,

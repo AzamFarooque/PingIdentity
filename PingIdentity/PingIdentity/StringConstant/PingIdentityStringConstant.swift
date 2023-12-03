@@ -16,14 +16,13 @@ struct StringConstants {
         static let PleaseEnterText = "Please enter Text"
         static let KeyCreated = "Keypair created"
         static let MessageEncrpted = "String encrypted"
-        static let SecondKeyCreated = "Second Key Created"
         static let SignatureIsAdded = "String signed"
         static let SignatureVerified =  "Signature verified"
         static let SignatureNotVerified =  "Signature Not Verified"
         static let TextDecrypted =  "String decrypted"
         static let TimeerCreatedForFifteenSec = "Timer created for 15 sec"
         static let FaceIdAuthoriseText = "Please authorise with touch id"
-        static let BiometricEnabledText = "Biometric Enabled"
+        static let BiometricEnabledText = "Biometric Enable"
         static let BiometricDisableText = "Biometric Disable"
         
     }
