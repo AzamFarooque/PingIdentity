@@ -10,6 +10,8 @@ import UserNotifications
 
 class LocalNotificationManager{
     
+    // MARK: - Notification permisssion
+    
     static func askForNotificationPermission(){
         UNUserNotificationCenter.current().requestAuthorization(options: [.badge , .sound, .alert]) {  (granted , error) in
             if error == nil {

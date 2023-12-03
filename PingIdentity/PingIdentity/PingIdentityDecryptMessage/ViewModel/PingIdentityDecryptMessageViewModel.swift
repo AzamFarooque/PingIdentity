@@ -15,7 +15,7 @@ class PingIdentityDecryptMessageViewModel{
     // MARK: - Verifying Signature
     
     func verifySignature(payload : [String : Any] , oncompletion : @escaping oncompletion){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0){
             let encryptedString = payload[StringConstants.JSONKey.EncryptedString]
             let signature = payload[StringConstants.JSONKey.Signature]
             if let encrpt = encryptedString , let sig = signature {
