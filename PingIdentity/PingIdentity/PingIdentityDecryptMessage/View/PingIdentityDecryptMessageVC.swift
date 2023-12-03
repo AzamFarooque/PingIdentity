@@ -8,19 +8,29 @@
 import UIKit
 import LocalAuthentication
 
+// MARK: - PingIdentityDecryptMessageVC Class
+
 class PingIdentityDecryptMessageVC: UIViewController {
+    
+    // MARK: - Properties
+    
+    // Label to display decrypted message
     let decryptMessageLbl = UILabel()
+    // User information from the notification
     var userInfo : [String : Any]?
+    // ViewModel for decryption
     let viewModel = PingIdentityDecryptMessageViewModel()
     
-    // MARK: - init
+    // MARK: - Initialization
     
     init(userInfo : [String : Any] , isBiometricRequired : Bool) {
         super.init(nibName: nil, bundle: nil)
         self.userInfo = userInfo
         if isBiometricRequired{
+            // Authorize using Face ID if required
             authorise()
         }else{
+            // Proceed to verify signature if Face ID is not required
             verifySignature()
         }
     }
@@ -34,10 +44,11 @@ class PingIdentityDecryptMessageVC: UIViewController {
     // MARK: - Deinit
     
     deinit {
+        // Remove observers to avoid memory leaks
         clearObserver()
     }
     
-    // MARK: - viewDidLoad Method
+    // MARK: - ViewDidLoad Method
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +59,10 @@ class PingIdentityDecryptMessageVC: UIViewController {
     // MARK: - Setup UI
     
     func setupUI(){
+        // Set up the label for displaying decrypted message
         setUpDecryptMessageLabel()
+        
+        // Add constraints for the label
         addConstraintsForDecryptLabel()
     }
     
@@ -59,7 +73,8 @@ class PingIdentityDecryptMessageVC: UIViewController {
     }
 }
 
-// Setting label
+// MARK: -  Setting label
+
 extension PingIdentityDecryptMessageVC {
     
     // MARK: - Decrypt Label Setup
@@ -91,10 +106,11 @@ extension PingIdentityDecryptMessageVC {
     }
 }
 
-// Faceid method
+// MARK: - Biometric
+
 extension PingIdentityDecryptMessageVC {
     
-    // MARK: - Faceid Authorise
+    // MARK: - Face ID Authorization
     
     func authorise(){
         let context = LAContext()
@@ -104,30 +120,38 @@ extension PingIdentityDecryptMessageVC {
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { [weak self] succes, error in
                 DispatchQueue.main.async {
                     guard succes , error == nil else {return}
+                    // Proceed to verify signature after successful Face ID authorization
                     self?.verifySignature()
                 }
             }
         }else{
-            // can not use
+            // Face ID not available or not configured
         }
         
     }
 }
 
-// Verify signature and decrypt message using RSA
+//MARK: - Verify Signature And Decrypt Message
+
 extension PingIdentityDecryptMessageVC{
+    
+    // MARK: - Verify Signature
     
     func verifySignature(){
         guard let payload = userInfo?[StringConstants.JSONKey.Payload] as? [String : Any] else {return}
         viewModel.verifySignature(payload: payload){ [weak self] (success , error) in
             if success{
                 self?.showToast(message: StringConstants.GenericStrings.SignatureVerified, font: .systemFont(ofSize: 12.0))
+                
+                // Proceed to decrypt the message after successful signature verification
                 self?.decryptMessage()
             }else{
                 self?.showToast(message: StringConstants.GenericStrings.SignatureNotVerified, font: .systemFont(ofSize: 12.0))
             }
         }
     }
+    
+    // MARK: - Decrypt Message
     
     func decryptMessage(){
         if let payload = userInfo?[StringConstants.JSONKey.Payload] as? [String : Any] , let encrpt = payload[StringConstants.JSONKey.EncryptedString] as? Data {
@@ -136,7 +160,7 @@ extension PingIdentityDecryptMessageVC{
                     self?.showToast(message: StringConstants.GenericStrings.TextDecrypted, font: .systemFont(ofSize: 12.0))
                     self?.decryptMessageLbl.text = self?.viewModel.decryptMessageDataSource?.decryptMessage
                 }else{
-                    
+                    // Decryption failed
                 }
             }
         }

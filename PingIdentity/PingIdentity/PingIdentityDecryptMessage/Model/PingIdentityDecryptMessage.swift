@@ -7,6 +7,9 @@
 
 import Foundation
 
+// MARK: - Decrypted Message Model
+
+/// Represents a model for storing the result of a decrypted message.
 struct PingIdentityDecryptMessage {
-    var decryptMessage : String?
+    var decryptMessage : String? // The decrypted message content
 }
