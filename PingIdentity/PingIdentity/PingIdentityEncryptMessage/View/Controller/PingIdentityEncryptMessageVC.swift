@@ -254,7 +254,7 @@ extension PingIdentityEncryptMessageVC {
     /// This method is triggered when the app moves to the background.
     @objc private func appDidEnterBackground() {
         // Schedule a background task to send a local notification
-        scheduleBackgroundTask(delay : 2)
+        scheduleBackgroundTask(delay : 15)
     }
     
     // MARK: - Application Will Terminate
@@ -262,7 +262,7 @@ extension PingIdentityEncryptMessageVC {
     /// This method is triggered when the app is terminated.
     @objc private func appWillTerminate() {
         // Schedule a background task to send a local notification
-        scheduleBackgroundTask(delay : 2)
+        scheduleBackgroundTask(delay : 15)
     }
     
     // MARK: - Scheduled Background Task
