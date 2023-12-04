@@ -1,10 +1,10 @@
 # PingIdentity
 
-#Overview
+# Overview
 
 This document provides instructions on using and understanding the Secure Messaging App. The app allows users to send secure and encrypted messages with the option to use biometric authentication for added security.
 
-#Features
+# Features
 
 1. Text Entry and Encryption:
 
@@ -48,7 +48,7 @@ Tap the lock screen notification to open the app and move to a new view controll
 If biometric authentication is enabled, approve the biometrics.
 Labels on the screen acknowledge each step, such as "Signature verified," "String decrypted," etc.
 
-#Dependencies
+# Dependencies
 
 The app relies on the following technologies and libraries:
 
@@ -59,7 +59,7 @@ Local Push Notifications
 LAContext for Biometric Authentication
 
 
-#Setup
+# Setup
 
 To run the app, follow these steps:
 
@@ -68,5 +68,5 @@ Open the project in Xcode.
 Build and run the app on a simulator or physical device.
 
 
-#Contributors
+# Contributors
 [Farooque Azam]
